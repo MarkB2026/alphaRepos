@@ -633,6 +633,33 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 .investigator-hero-primary{font-size:clamp(19px,2.1vw,28px)}
 @media(max-width:560px){.site-nav .site-brand .investigator-nav-name{font-size:19px}}
 </style>
+<style id="botinstincts-hero-redesign">
+/* Bot Instincts: editorial hero with visual decision comparison. Scoped to homepage hero. */
+.home-hero{grid-template-columns:minmax(0,1.16fr) minmax(340px,.84fr);gap:26px;align-items:center;padding:30px 32px;min-height:0}
+.home-hero-copy{min-width:0}
+.instinct-eyebrow{display:flex;align-items:center;gap:9px;color:#75dff5;font-size:10px;font-weight:900;letter-spacing:1.65px;margin-bottom:12px}
+.instinct-dot{display:inline-block;width:7px;height:7px;background:#42d8f4;border-radius:50%;box-shadow:0 0 11px #39d4ef88}
+.home-hero-copy h1{font-size:clamp(32px,3.3vw,49px);line-height:1.1;margin:0 0 10px;letter-spacing:-1.2px}
+.instinct-subhead{font-size:clamp(19px,1.75vw,25px);line-height:1.25;color:#f2f8ff;margin:0 0 16px;font-weight:800;letter-spacing:-.4px}
+.instinct-subhead span{color:#50d6f2}
+.home-hero-copy .instinct-lead{font-size:13px;line-height:1.65;color:#b8cddd;max-width:740px;margin:0 0 16px}
+.instinct-lead strong{color:#effaff}
+.instinct-comparison{display:grid;grid-template-columns:minmax(0,1fr) 27px minmax(0,1fr);align-items:center;gap:9px;padding:12px;border:1px solid #2c6179;border-radius:10px;background:linear-gradient(105deg,#0b1d2a,#112b3d);margin:0 0 15px;max-width:740px}
+.instinct-side{display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0;padding:9px 11px}
+.instinct-side-label{font-size:10px;letter-spacing:1.1px;font-weight:900;color:#91a9b9}
+.instinct-side strong{font-size:clamp(13px,1.15vw,17px);line-height:1.25;color:#e5edf4}
+.instinct-side small{font-size:11px;color:#91aabd;line-height:1.35}
+.instinct-new{background:#15384b;border:1px solid #2b7a96;border-radius:8px}
+.instinct-new .instinct-side-label,.instinct-new strong{color:#62dff7}
+.instinct-arrow{color:#48d6f3;text-align:center;font-size:27px;font-weight:800}
+.home-hero-copy .instinct-vision{font-size:12px;line-height:1.65;color:#b7ccda;margin:0 0 12px}
+.instinct-vision strong{color:#e5f7ff}
+.home-hero-copy .instinct-signoff{border-top:1px solid #2c5264;padding-top:12px;margin:0;color:#79e4f7;font-size:13px;font-weight:800;line-height:1.5}
+.home-hero-logo{align-self:center}
+.home-hero-logo img{width:min(100%,550px);max-height:none}
+@media(max-width:1050px){.home-hero{grid-template-columns:1fr;gap:20px}.home-hero-logo img{width:min(100%,520px)}.home-hero-logo{justify-content:center}}
+@media(max-width:600px){.home-hero{padding:22px 17px}.instinct-comparison{gap:3px;padding:7px}.instinct-side{padding:8px 6px}.instinct-side-label{font-size:9px;letter-spacing:.4px}.instinct-side strong{font-size:12px}.instinct-side small{font-size:10px}.instinct-arrow{font-size:20px}.home-hero-copy h1{font-size:34px}}
+</style>
 </head>
 <body>
 <nav aria-label="Main navigation" class="site-nav">
@@ -686,57 +713,25 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 </svg>
 
 
-
 <div class="home-hero-copy">
-  <h1>
-    <span class="cyan-line">The game has changed.</span>
-  </h1>
-
-  <h2>The Future of Trading Is Instinctive.</h2>
-
-  <p>
-    The rigid, hard-coded <strong>"if-then" algorithm
-    is fast becoming a relic of the past.</strong>
-    Traditional trading bots follow predefined rules.
-    They're fast, but speed isn't intelligence.
-  </p>
-
-  <p>
-    <strong>BOT INSTINCTS represents the next evolution
-    of automated trading.</strong>
-    Combining HAL intelligence, adaptive market analysis,
-    and the collective insights of the HIVE, we're building
-    bots that go beyond simply reacting to signals.
-    Systems designed to recognize patterns, evaluate context,
-    weigh conflicting evidence, and adapt to changing markets.
-  </p>
-
-  <p class="hero-local">
-    <strong>Your own team of intelligent trading bots.</strong>
-    Run multiple specialized strategies simultaneously,
-    with intelligent trade confirmation, automated execution,
-    and risk management under your control.
-  </p>
-
-  <p class="hero-signoff">
-    <strong>Not just "Did a rule trigger?"</strong><br>
-    <strong>But "Does this trade actually make sense?"</strong>
-  </p>
-
-  <p>
-    <em>Trading intelligence so advanced,
-    it begins to resemble instinct.</em>
-  </p>
+  <div class="instinct-eyebrow"><span class="instinct-dot"></span> THE NEXT EVOLUTION OF TRADING</div>
+  <h1><span class="cyan-line">The game has changed.</span></h1>
+  <h2 class="instinct-subhead">The future of trading is <span>instinctive.</span></h2>
+  <p class="instinct-lead">Rigid, hard-coded <strong>“if-then” algorithms</strong> are giving way to intelligent systems designed to recognize patterns, evaluate context, and adapt to changing markets. <strong>Speed alone isn't intelligence.</strong></p>
+  <div class="instinct-comparison" aria-label="Traditional bots versus Bot Instincts">
+    <div class="instinct-side instinct-old"><span class="instinct-side-label">TRADITIONAL BOTS</span><strong>Did a rule trigger?</strong><small>Execute predefined instructions</small></div>
+    <span class="instinct-arrow" aria-hidden="true">→</span>
+    <div class="instinct-side instinct-new"><span class="instinct-side-label">BOT INSTINCTS</span><strong>Does this trade make sense?</strong><small>Evaluate context before acting</small></div>
+  </div>
+  <p class="instinct-vision">With HAL intelligence and the collective vision of the HIVE, we're building trading bots that go beyond simple signals—analyzing opportunities, weighing evidence, and executing strategies <strong>under your control.</strong></p>
+  <p class="instinct-signoff">Trading intelligence so advanced, it begins to resemble instinct.</p>
 </div>
-
-
-<!-- tag line tagline -->
 <div class="home-hero-logo">
 <img class="investigator-animated-logo" alt="Bot Instincts logo" loading="eager" src="assets/logo-animated.svg">
 <div class="investigator-hero-taglines">
-  <div class="investigator-hero-kicker"></div>
-  <div class="investigator-hero-primary"><span></div>
-  <div class="investigator-hero-secondary"></div>
+  <div class="investigator-hero-kicker">BEYOND AUTOMATION</div>
+  <div class="investigator-hero-primary">Sentient <span>Trading</span> Instincts.</div>
+  <div class="investigator-hero-secondary">Human strategies. Machine instincts.</div>
 </div>
 
 
