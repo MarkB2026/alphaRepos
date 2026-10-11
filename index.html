@@ -674,14 +674,14 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 <style id="botinstincts-hero-box-alignment">
 /* Align the tagline panel precisely with the comparison panel on desktop. */
 @media (min-width:1051px) {
-  .home-hero .home-hero-logo { transform:translateY(var(--hero-align-y, 0px)); }
+  .home-hero .home-hero-logo { translate: 0 var(--hero-align-y, 0px); }
   .home-hero-logo .hero-logo-message {
     min-height:var(--hero-comparison-height, auto);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
   }
 }
 @media (max-width:1050px) {
-  .home-hero .home-hero-logo { transform:none!important; }
+  .home-hero .home-hero-logo { translate: none; }
   .home-hero-logo .hero-logo-message { min-height:0; }
 }
 </style>
@@ -759,12 +759,6 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
     <h2>Sentient <span>Trading</span> Instincts.</h2>
     <p>Human strategies. Machine instincts.</p>
   </div>
-</div>
-
-
-
-
-
 </div>
 </header>
 
@@ -848,7 +842,7 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
   let scheduled = false;
   function alignBoxes() {
     scheduled = false;
-    logoColumn.style.removeProperty('--hero-align-y');
+    logoColumn.style.setProperty('--hero-align-y', '0px');
     tagline.style.removeProperty('--hero-comparison-height');
     if (window.innerWidth <= 1050) return;
     const target = comparison.getBoundingClientRect();
