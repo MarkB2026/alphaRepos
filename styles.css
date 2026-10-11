@@ -1787,3 +1787,41 @@ body {
   line-height: 1.6;
 }
 
+
+/* Text panel beneath animated logo */
+.hero-logo-message {
+  margin: 24px auto 0;
+  padding: 20px 28px;
+  width: 100%;
+  max-width: 480px;
+
+  background: linear-gradient(135deg, #102b3d, #0b1d2b);
+  border: 1px solid #32718d;
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+.hero-logo-message .eyebrow {
+  color: #67d8fc;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-logo-message h2 {
+  margin: 10px 0 8px;
+  font-size: clamp(20px, 2vw, 26px);
+  color: #f3f9ff;
+}
+
+.hero-logo-message h2 span {
+  color: #38d5f4;
+}
+
+.hero-logo-message p {
+  margin: 0;
+  color: #a9c9d9;
+  font-size: 13px;
+}
