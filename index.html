@@ -671,6 +671,20 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 .hero-logo-message p{margin:0;color:#a9c9d9;font-size:13px;line-height:1.5}
 @media(max-width:600px){.home-hero-logo .hero-logo-message{padding:16px 14px;margin-top:10px}}
 </style>
+<style id="botinstincts-hero-box-alignment">
+/* Align the tagline panel precisely with the comparison panel on desktop. */
+@media (min-width:1051px) {
+  .home-hero .home-hero-logo { transform:translateY(var(--hero-align-y, 0px)); }
+  .home-hero-logo .hero-logo-message {
+    min-height:var(--hero-comparison-height, auto);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+}
+@media (max-width:1050px) {
+  .home-hero .home-hero-logo { transform:none!important; }
+  .home-hero-logo .hero-logo-message { min-height:0; }
+}
+</style>
 </head>
 <body>
 <nav aria-label="Main navigation" class="site-nav">
@@ -825,5 +839,32 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
     Choose your bots. Build your Bot Instincts control center. · WallStreetBots.org
    </div>
 </div>
+<script id="botinstincts-hero-box-alignment-js">
+(function () {
+  const comparison = document.querySelector('.instinct-comparison');
+  const logoColumn = document.querySelector('.home-hero-logo');
+  const tagline = logoColumn?.querySelector('.hero-logo-message');
+  if (!comparison || !logoColumn || !tagline) return;
+  let scheduled = false;
+  function alignBoxes() {
+    scheduled = false;
+    logoColumn.style.removeProperty('--hero-align-y');
+    tagline.style.removeProperty('--hero-comparison-height');
+    if (window.innerWidth <= 1050) return;
+    const target = comparison.getBoundingClientRect();
+    const current = tagline.getBoundingClientRect();
+    logoColumn.style.setProperty('--hero-align-y', (target.top - current.top).toFixed(1) + 'px');
+    tagline.style.setProperty('--hero-comparison-height', target.height.toFixed(1) + 'px');
+  }
+  function scheduleAlign() {
+    if (!scheduled) { scheduled = true; requestAnimationFrame(alignBoxes); }
+  }
+  window.addEventListener('resize', scheduleAlign, {passive:true});
+  window.addEventListener('load', scheduleAlign);
+  logoColumn.querySelector('img')?.addEventListener('load', scheduleAlign);
+  if (document.fonts?.ready) document.fonts.ready.then(scheduleAlign);
+  scheduleAlign();
+})();
+</script>
 </body>
 </html>
