@@ -729,6 +729,16 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 .bot-discretion-pop p.bot-discretion-last{color:#80e6fa!important;margin-bottom:0!important;}
 @media(max-width:650px){.bot-discretion-pop{left:auto;right:-12px;width:min(360px,calc(100vw - 48px));}}
 </style>
+<style id="hero-quote-position-fix">
+/* Quote sits directly below the upper-right logo; disclosure stays beside the text. */
+.home-hero .home-hero-logo{align-self:start!important;justify-content:flex-start!important;padding-top:0!important;}
+.home-hero-logo .hero-quote{width:min(100%,470px);margin:8px auto 18px;color:#d9edf8;font-size:13px;line-height:1.65;text-align:center;position:relative;}
+.hero-quote-text{display:inline;}
+.hero-quote .bot-discretion-info{display:inline;position:static;margin-left:5px;vertical-align:baseline;}
+.hero-quote .bot-discretion-info>summary{display:inline-grid;vertical-align:middle;width:19px;height:19px;}
+.hero-quote .bot-discretion-pop{left:50%;transform:translateX(-50%);top:calc(100% + 8px);width:min(490px,calc(100vw - 55px));text-align:left;}
+@media(max-width:650px){.hero-quote .bot-discretion-pop{left:50%;right:auto;}}
+</style>
 </head>
 <body>
 <nav aria-label="Main navigation" class="site-nav">
@@ -786,7 +796,7 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
   <div class="instinct-eyebrow"><span class="instinct-dot"></span> THE NEXT EVOLUTION OF TRADING</div>
   <h1><span class="cyan-line">The game has changed.</span></h1>
   <h2 class="instinct-subhead">The future of trading is <span>instinctive.</span></h2>
-  <p class="instinct-lead"><p>“Bots cannot <i>think</i>, form an opinion, or decide whether a trade makes sense beyond their strict rules.” <details class="bot-discretion-info"><summary aria-label="Why question the rules? Learn about the BOt Instincts philosophy" title="Why question the rules?">i</summary><div class="bot-discretion-pop"><h3>Why give a machine the ability to think if we're only going to let it follow instructions?</h3><p>We've built the Ferrari of trading intelligence, then programmed it to drive like a minivan.</p><p>We spent decades removing human discretion from trading because humans are emotional, inconsistent, and biased. But instead of replacing those weaknesses with data-driven machine judgment, we've often replaced discretion entirely with rigid IF/THEN rules.</p><p><strong>Why give a machine the ability to think if we're only going to let it follow instructions?</strong></p><p>At BOt Instincts, we're developing a different approach: give the BOt discretion to evaluate the trade while keeping hard risk controls in place. The goal is not random decisions—it's explainable, data-informed judgment within defined limits.</p><p class="bot-discretion-last"><strong>Give the BOt the racetrack. Keep the guardrails.</strong></p></div></details></p>Most trading bots, especially those with Natural-language strategy builders still follow rigid, hard-coded <strong>“if-then” algorithms</strong>. BOt Instincts is being developed to move beyond that model—with systems designed to recognize patterns, evaluate context, and adapt to changing markets. <strong>Speed alone isn't intelligence.</strong></p>
+  <p class="instinct-lead">Most trading bots, especially those with Natural-language strategy builders still follow rigid, hard-coded <strong>“if-then” algorithms</strong>. BOt Instincts is being developed to move beyond that model—with systems designed to recognize patterns, evaluate context, and adapt to changing markets. <strong>Speed alone isn't intelligence.</strong></p>
   <div class="instinct-comparison" aria-label="Traditional bots versus Bot Instincts">
     <div class="instinct-side instinct-old"><span class="instinct-side-label">TRADITIONAL BOTS</span><strong>Did a rule trigger?</strong><small>Execute predefined instructions</small></div>
     <span class="instinct-arrow" aria-hidden="true">→</span>
@@ -798,6 +808,7 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 
 <div class="home-hero-logo">
 <img src="assets/logo-animated.webp?v=20261012b" alt="BOt Instincts" style="width:100%;height:auto;object-fit:contain;">
+  <div class="hero-quote"><span class="hero-quote-text">“Bots cannot <i>think</i>, form an opinion, or decide whether a trade makes sense beyond their strict rules.”</span> <details class="bot-discretion-info"><summary aria-label="Why question the rules? Learn about the BOt Instincts philosophy" title="Why question the rules?">i</summary><div class="bot-discretion-pop"><h3>Why give a machine the ability to think if we're only going to let it follow instructions?</h3><p>We've built the Ferrari of trading intelligence, then programmed it to drive like a minivan.</p><p>We spent decades removing human discretion from trading because humans are emotional, inconsistent, and biased. But instead of replacing those weaknesses with data-driven machine judgment, we've often replaced discretion entirely with rigid IF/THEN rules.</p><p><strong>Why give a machine the ability to think if we're only going to let it follow instructions?</strong></p><p>At BOt Instincts, we're developing a different approach: give the BOt discretion to evaluate the trade while keeping hard risk controls in place. The goal is not random decisions—it's explainable, data-informed judgment within defined limits.</p><p class="bot-discretion-last"><strong>Give the BOt the racetrack. Keep the guardrails.</strong></p></div></details></div>
   <div class="hero-logo-message hal-future-card">
     <div class="eyebrow">BOt INTELLIGENCE · THE NEXT CHAPTER</div>
     <h2>Tell BOt your idea.<br><span>Let it build the trade plan.</span></h2>
