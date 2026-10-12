@@ -716,6 +716,19 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 .why-bot-instincts-idea .idea-foot{margin-top:9px;font-size:12px;color:#91b5c6;}
 @media(max-width:580px){.why-bot-instincts-idea{padding:18px 16px;gap:12px}.why-bot-instincts-idea .idea-icon{flex-basis:44px;width:44px;height:44px}.why-bot-instincts-idea .idea-icon svg{width:28px;height:28px}}
 </style>
+<style id="bot-discretion-info-style">
+/* Inline, accessible explanation of the homepage quote; no other sections changed. */
+.bot-discretion-info{display:inline-block;position:relative;vertical-align:middle;margin-left:7px;font-style:normal;}
+.bot-discretion-info>summary{list-style:none;display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #66d9f5;border-radius:50%;background:#123548;color:#9aefff;font:bold 12px/1 Segoe UI,Arial,sans-serif;cursor:pointer;user-select:none;}
+.bot-discretion-info>summary::-webkit-details-marker{display:none;}
+.bot-discretion-info>summary:hover,.bot-discretion-info[open]>summary{background:#2bbbdc;color:#061923;}
+.bot-discretion-info>summary:focus-visible{outline:2px solid #b7efff;outline-offset:3px;}
+.bot-discretion-pop{position:absolute;top:calc(100% + 12px);left:0;z-index:40;width:min(490px,calc(100vw - 50px));max-height:min(68vh,540px);overflow-y:auto;padding:19px 21px;border:1px solid #4e9bb4;border-radius:11px;background:#0e2331;box-shadow:0 16px 48px #000b;text-align:left;color:#c8deeb;font:14px/1.6 Segoe UI,Arial,sans-serif;}
+.bot-discretion-pop h3{font-size:18px;line-height:1.35;color:#f0faff;margin:0 0 12px;}
+.bot-discretion-pop p{font-size:13px!important;line-height:1.65!important;margin:0 0 12px!important;color:#c8deeb!important;}
+.bot-discretion-pop p.bot-discretion-last{color:#80e6fa!important;margin-bottom:0!important;}
+@media(max-width:650px){.bot-discretion-pop{left:auto;right:-12px;width:min(360px,calc(100vw - 48px));}}
+</style>
 </head>
 <body>
 <nav aria-label="Main navigation" class="site-nav">
@@ -773,7 +786,7 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
   <div class="instinct-eyebrow"><span class="instinct-dot"></span> THE NEXT EVOLUTION OF TRADING</div>
   <h1><span class="cyan-line">The game has changed.</span></h1>
   <h2 class="instinct-subhead">The future of trading is <span>instinctive.</span></h2>
-  <p class="instinct-lead"><p>“Bots cannot <i>think</i>, form an opinion, or decide whether a trade makes sense beyond their strict rules.”</p>Most trading bots, especially those with Natural-language strategy builders still follow rigid, hard-coded <strong>“if-then” algorithms</strong>. BOt Instincts is being developed to move beyond that model—with systems designed to recognize patterns, evaluate context, and adapt to changing markets. <strong>Speed alone isn't intelligence.</strong></p>
+  <p class="instinct-lead"><p>“Bots cannot <i>think</i>, form an opinion, or decide whether a trade makes sense beyond their strict rules.” <details class="bot-discretion-info"><summary aria-label="Why question the rules? Learn about the BOt Instincts philosophy" title="Why question the rules?">i</summary><div class="bot-discretion-pop"><h3>Why give a machine the ability to think if we're only going to let it follow instructions?</h3><p>We've built the Ferrari of trading intelligence, then programmed it to drive like a minivan.</p><p>We spent decades removing human discretion from trading because humans are emotional, inconsistent, and biased. But instead of replacing those weaknesses with data-driven machine judgment, we've often replaced discretion entirely with rigid IF/THEN rules.</p><p><strong>Why give a machine the ability to think if we're only going to let it follow instructions?</strong></p><p>At BOt Instincts, we're developing a different approach: give the BOt discretion to evaluate the trade while keeping hard risk controls in place. The goal is not random decisions—it's explainable, data-informed judgment within defined limits.</p><p class="bot-discretion-last"><strong>Give the BOt the racetrack. Keep the guardrails.</strong></p></div></details></p>Most trading bots, especially those with Natural-language strategy builders still follow rigid, hard-coded <strong>“if-then” algorithms</strong>. BOt Instincts is being developed to move beyond that model—with systems designed to recognize patterns, evaluate context, and adapt to changing markets. <strong>Speed alone isn't intelligence.</strong></p>
   <div class="instinct-comparison" aria-label="Traditional bots versus Bot Instincts">
     <div class="instinct-side instinct-old"><span class="instinct-side-label">TRADITIONAL BOTS</span><strong>Did a rule trigger?</strong><small>Execute predefined instructions</small></div>
     <span class="instinct-arrow" aria-hidden="true">→</span>
