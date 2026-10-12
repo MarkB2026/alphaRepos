@@ -1,4 +1,1 @@
-BOt Instincts one-time animation
-Starts flat, changes to curved once, holds curved.
-Both states use the identical logo geometry and canvas; only the eyes change.
-Use logo-once.webp in your website's assets folder.
+Uses the two user-supplied logos. The flat logo remains unchanged for 5 seconds. Only the eye region changes into the curved expression, without added eyelashes. Same image dimensions and stationary lettering. The last frame holds for 60 seconds; browser animation formats do not reliably support a true play-once-and-freeze state across every browser. For guaranteed permanent freeze use JavaScript to swap to logo-happy-no-lashes.png after animation.
