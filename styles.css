@@ -1826,3 +1826,22 @@ body {
   color: #a9c9d9;
   font-size: 13px;
 }
+
+/* BOt Instincts logo: allow antenna breathing room.
+   Use this on the actual hero image selector; .hero-brand-logo is a suggested class. */
+.hero-brand-logo {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  margin: 0 auto;
+}
+/* If the hero image wrapper is clipping the logo, remove the clipping. */
+.hero-logo-wrap { overflow: visible; padding-top: 12px; }
+@media (max-width: 700px) {
+  .hero-brand-logo { max-width: 100%; }
+}
+
+
