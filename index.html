@@ -625,7 +625,7 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 @media(max-width:900px){.home-hero{grid-template-columns:1fr!important;gap:28px!important;min-height:0!important}.home-hero .home-hero-logo{margin:0 auto!important;max-width:610px!important}.investigator-hero-taglines{margin-top:12px}}
 @media(max-width:560px){.home-hero{padding:23px 19px!important;gap:20px!important}.investigator-hero-primary{font-size:21px}.investigator-hero-kicker{font-size:10px}}
 </style>
- <link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
 <style id="botinstincts-brand-refinement">
 .site-nav .site-brand .investigator-nav-name{font-size:clamp(17px,2vw,22px);letter-spacing:-.4px;}
 .home-hero-logo .investigator-animated-logo{width:100%!important;max-width:650px!important;max-height:none!important;object-fit:contain;}
@@ -684,6 +684,13 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
   .home-hero .home-hero-logo { translate: none; }
   .home-hero-logo .hero-logo-message { min-height:0; }
 }
+</style>
+<style id="botinstincts-logo-visibility-fix">
+/* The original hero alignment translated the whole logo upward and clipped its antenna. */
+.home-hero {overflow:visible!important;padding-top:54px!important;}
+.home-hero .home-hero-logo {translate:none!important;transform:none!important;overflow:visible!important;align-self:center!important;padding-top:18px!important;}
+.home-hero .home-hero-logo > img {display:block!important;width:100%!important;max-width:540px!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;margin:0 auto!important;filter:none!important;mask-image:none!important;-webkit-mask-image:none!important;}
+@media(max-width:900px){.home-hero{padding-top:34px!important}.home-hero .home-hero-logo{padding-top:12px!important}}
 </style>
 </head>
 <body>
@@ -753,7 +760,7 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 </div>
 
 <div class="home-hero-logo">
-<img src="assets/logo-animated.gif" alt="BOt Instincts" style="width:100%;height:auto;object-fit:contain;">
+<img src="assets/logo-animated.webp?v=20261012b" alt="BOt Instincts" style="width:100%;height:auto;object-fit:contain;">
   <div class="hero-logo-message">
     <div class="eyebrow">BEYOND AUTOMATION</div>
     <h2>Sentient behaviour with bot Precision.</h2>
@@ -833,32 +840,6 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
     Choose your bots. Build your Bot Instincts control center. · WallStreetBots.org
    </div>
 </div>
-<script id="botinstincts-hero-box-alignment-js">
-(function () {
-  const comparison = document.querySelector('.instinct-comparison');
-  const logoColumn = document.querySelector('.home-hero-logo');
-  const tagline = logoColumn?.querySelector('.hero-logo-message');
-  if (!comparison || !logoColumn || !tagline) return;
-  let scheduled = false;
-  function alignBoxes() {
-    scheduled = false;
-    logoColumn.style.setProperty('--hero-align-y', '0px');
-    tagline.style.removeProperty('--hero-comparison-height');
-    if (window.innerWidth <= 1050) return;
-    const target = comparison.getBoundingClientRect();
-    const current = tagline.getBoundingClientRect();
-    logoColumn.style.setProperty('--hero-align-y', (target.top - current.top).toFixed(1) + 'px');
-    tagline.style.setProperty('--hero-comparison-height', target.height.toFixed(1) + 'px');
-  }
-  function scheduleAlign() {
-    if (!scheduled) { scheduled = true; requestAnimationFrame(alignBoxes); }
-  }
-  window.addEventListener('resize', scheduleAlign, {passive:true});
-  window.addEventListener('load', scheduleAlign);
-  logoColumn.querySelector('img')?.addEventListener('load', scheduleAlign);
-  if (document.fonts?.ready) document.fonts.ready.then(scheduleAlign);
-  scheduleAlign();
-})();
-</script>
+
 </body>
 </html>
