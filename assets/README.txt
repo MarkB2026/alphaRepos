@@ -1,1 +1,8 @@
-Botfolios website brand assets. Original supplied SVG/PNG logos preserved. CSS and favicon assets included. Copy files into your website assets folder and add head-snippet.html tags to HTML head. Favicon is cropped from original supplied logo.
+BOt Instincts animated logo
+
+Animation starts with flat neutral eyes, transitions to curved happy eyes, then returns to flat in a seamless loop.
+
+For your website, place logo-animated.webp in assets/ and use:
+<img src="assets/logo-animated.webp" alt="BOt Instincts" style="width:100%;height:auto;object-fit:contain;">
+
+The WebP and GIF support transparent backgrounds. WebP is preferred for web use.
