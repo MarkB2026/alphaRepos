@@ -676,7 +676,7 @@ body{background:radial-gradient(ellipse at 76% 0%,#102a3c 0%,#0a131b 52%,#090e13
 @media (min-width:1051px) {
   .home-hero .home-hero-logo { translate: 0 var(--hero-align-y, 0px); }
   .home-hero-logo .hero-logo-message {
-    min-height:var(--hero-comparison-height, auto);
+   min-height: max(190px, var(--hero-comparison-height, 0px));
     display:flex;flex-direction:column;align-items:center;justify-content:center;
   }
 }
