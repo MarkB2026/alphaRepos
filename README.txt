@@ -1,7 +1,8 @@
-BACKTEST MECHANIC — HOMEPAGE V3 (BLUE + ORANGE)
+Backtest Mechanic — Dealership + Homepage
 
-Open index.html to preview. Upload index.html and assets/workshop-hero.png together, preserving the assets/ path.
+index.html: homepage with download gateway to basic.html#backtest-mechanic
+basic.html: redesigned Basic catalogue with flagship application first, Courtesy Cars, premium showroom, and original cart/payment/licensing/scripts retained.
 
-Based directly on the v2 homepage: all sections, internal navigation anchors and existing page destinations remain intact. Only CSS colors, gradients, accents, hover/focus states and brand-comment cleanup were changed.
+The installer is NOT supplied. Download button on basic.html intentionally reports unpublished status rather than linking to a nonfunctional or fake ZIP. Wire to a verified installer after release testing.
 
-This is a homepage visual prototype; other pages and backend features are not included or deployed.
+Keep index.html, basic.html and assets/ together. All original external endpoint integrations and references in basic.html are retained.
