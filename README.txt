@@ -1,1 +1,7 @@
-Replace your existing index.html with this index.html. Keep your assets folder, including assets/wsbhero_nocandles.png. The homepage fix is already embedded in index.html; no stylesheet change is needed. homepage-responsive.css is an optional copy of the applied rules, for reference. Existing links, analytics, bot builder, payment and scripts are retained. The separately supplied global CSS was not changed.
+BACKTEST MECHANIC — HOMEPAGE V3 (BLUE + ORANGE)
+
+Open index.html to preview. Upload index.html and assets/workshop-hero.png together, preserving the assets/ path.
+
+Based directly on the v2 homepage: all sections, internal navigation anchors and existing page destinations remain intact. Only CSS colors, gradients, accents, hover/focus states and brand-comment cleanup were changed.
+
+This is a homepage visual prototype; other pages and backend features are not included or deployed.
