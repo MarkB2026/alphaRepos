@@ -86,7 +86,25 @@ body{background:radial-gradient(ellipse at 78% -5%,#153c69 0,#0b1d34 37%,#080f1c
 }
 @media(min-width:701px) and (max-width:1050px){.site-links a{font-size:14px!important;font-weight:800!important;padding:8px 10px!important}}
 @media(max-width:700px){.site-links a{font-size:13px!important;font-weight:800!important;padding:7px 8px!important}}
-</style></head>
+</style><style id="bm-logo-size-v13">
+/* Larger right-hand logo while preserving the existing navigation and links. */
+@media (min-width:1351px) {
+  .site-brand{flex:0 0 445px!important;width:445px!important;max-width:445px!important}
+  .site-nav{gap:8px!important}
+  .site-links a{padding-left:6px!important;padding-right:6px!important}
+}
+@media (min-width:1051px) and (max-width:1350px) {
+  .site-brand{flex:0 0 365px!important;width:365px!important;max-width:365px!important}
+  .site-links{flex-wrap:wrap!important}
+}
+@media (min-width:701px) and (max-width:1050px) {
+  .site-brand{width:min(520px,90vw)!important;max-width:90vw!important}
+}
+@media (max-width:700px) {
+  .site-brand{width:min(410px,92vw)!important;max-width:92vw!important}
+}
+</style>
+</head>
 <body><nav aria-label="Main navigation" class="site-nav"><div class="site-links"><a aria-current="page" href="index.html">Home</a><a href="#modes">Mechanic Modes</a><a href="#process">How It Works</a><a href="#dealership">The Dealership</a><a href="basic.html">Trading Bots</a><a href="tools.html">Trading Tools</a><a href="howitworks.html">Control Center</a><a href="product_slideshows.html">Product Slideshows</a><a href="about.html">About</a></div><a aria-label="Backtest Mechanic — Home" class="site-brand" href="index.html"><img alt="Backtest Mechanic" src="assets/logo.png"/></a></nav>
 <main class="shell"><section aria-label="Backtest Mechanic" class="hero" id="top"><div class="hero-content"><div class="eyebrow">AI-powered strategy workshop · HAL intelligence</div><h1>YOUR STRATEGY<br/>IS <span>IN THE SHOP.</span></h1><p>A backtester tells you what happened. <strong>Backtest Mechanic investigates why.</strong> Build a trading strategy, inspect every trade, diagnose weaknesses, test controlled repairs, and find out whether the improvements actually hold up.</p><div class="actions"><a class="btn" href="basic.html#backtest-mechanic">⬇ DOWNLOAD BACKTEST MECHANIC</a><a class="btn outline" href="#dealership">VISIT THE DEALERSHIP →</a></div><div class="status">BUILD · BACKTEST · DIAGNOSE · REPAIR · RETEST · VALIDATE · AUTOMATE</div></div></section>
 <div aria-label="Research workflow" class="strip"><span>01 INSPECT</span><span>02 BACKTEST</span><span>03 DIAGNOSE</span><span>04 REPAIR</span><span>05 RETEST</span><span>06 VALIDATE</span></div>
