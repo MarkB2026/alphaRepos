@@ -345,6 +345,103 @@ body{background:radial-gradient(ellipse at 74% -10%,#153e69 0%,#0a1727 38%,#0710
 }
 .bot-demo-thumb:hover .bot-demo-play{transform:scale(1.1)}
 @media (prefers-reduced-motion:reduce){.bot-demo-thumb .bot-demo-play{transition:none!important}}
+</style><style id="dealership-visual-polish-20261014">
+/* Backtest Mechanic Dealership: conservative visual polish, 2026-10-14.
+   Visual overrides only. Checkout, selections, dialogs, scripts and IDs untouched. */
+:root { --cyan:#398be3; --green:#398be3; --gold:#ff9736; }
+html { scroll-padding-top:94px; }
+body { color:#f0f6ff; }
+button, a, input { transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease; }
+button:focus-visible,a:focus-visible,input:focus-visible { outline:2px solid #ff9a37;outline-offset:3px; }
+.section { padding-top:43px;padding-bottom:43px; }
+.heading { align-items:end;gap:22px; }
+.heading h2 { line-height:1.15; }
+.product,.small-card,.tile { border-color:#315c8a; }
+.product { padding:22px; }
+.product h3 { line-height:1.2; }
+.product .actions { gap:9px!important; }
+.product .actions button,.product .actions a { min-height:36px; }
+.product .actions .more,.slideshow-home-link { border-color:#4076ac;color:#e4f0ff;background:#173a61; }
+.product .actions .more:hover,.slideshow-home-link:hover { background:#205284;color:#fff; }
+/* Free and paid choices are distinguished by their labels, not green vs gold. */
+.download-choice:not(.paid),
+.download-choice:not(.paid):has(input:checked) {
+  background:#153e6b!important;border:1px solid #468cda!important;
+  color:#edf6ff!important;box-shadow:none!important;
+}
+.download-choice:not(.paid):hover { background:#1b5188!important;box-shadow:none!important; }
+.download-choice:not(.paid):has(input:checked) { background:#275b90!important;border-color:#ff9a37!important; }
+.download-choice:not(.paid) input { accent-color:#ff9736!important; }
+.download-choice.paid { background:#35271c;border-color:#a66b37;color:#ffd4a4; }
+/* Checkout is deliberately not structurally altered. */
+#purchaseCart .free { color:#ffb166; }
+#purchaseCart .createBtn { background:linear-gradient(135deg,#ffb45b,#ff861f);color:#201306; }
+#bitcoinCheckout .btn:not(.gold):not(.secondary) { background:linear-gradient(135deg,#ffb45b,#ff861f);border-color:#ffb15d;color:#201306; }
+#bitcoinCheckout .btn.secondary { background:#173d65;border-color:#477db0;color:#e9f4ff; }
+#bitcoinCheckout .license { border-color:#356a9a;background:#112c48; }
+#bitcoinCheckout .copyrow button { color:#93c7ff; }
+#intelligence .thinkbox-beta { border-left-color:#ff9638;background:#102b47; }
+#intelligence .thinkbox-beta strong { color:#ffc18b; }
+#chart .adjustable-stop-note { border-left-color:#ff9638; }
+#chart .chart-compact-list li::before { color:#ff9638; }
+#chart .chart-privacy-line { border-left-color:#ff9638; }
+#free .product .lead,#premium .product .lead { min-height:68px; }
+.bot-demo-thumb { border-color:#396a99!important; }
+.bot-demo-thumb:hover { border-color:#ff9a37!important; }
+@media(max-width:880px){.section{padding-top:34px;padding-bottom:34px}}
+@media(max-width:610px){.section{padding-top:27px;padding-bottom:27px}.product{padding:18px}#free .product .lead,#premium .product .lead{min-height:0}.heading{gap:8px}}
+@media(prefers-reduced-motion:reduce){button,a,input{transition:none!important}}
+</style><style id="dealership-action-theme-fix-20261014">
+/* Consistent Backtest Mechanic blue/orange action theme. */
+.slideshow-home-link,
+.product .actions .slideshow-home-link,
+.feature .actions .slideshow-home-link,
+#intelligence .tile .actions button.more,
+#beebot-banner .tile .actions button.more,
+.tile button.more,
+.small-card button.more,
+.feature button.more {
+  display:inline-flex;align-items:center;justify-content:center;
+  background:#173e68!important;
+  border:1px solid #477eb4!important;
+  color:#f0f7ff!important;
+  border-radius:7px;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+.slideshow-home-link:hover,
+.slideshow-home-link:focus-visible,
+#intelligence .tile .actions button.more:hover,
+#beebot-banner .tile .actions button.more:hover,
+.tile button.more:hover,.small-card button.more:hover,.feature button.more:hover {
+  background:#24588c!important;
+  border-color:#ff9a37!important;
+  color:#fff!important;
+}
+/* HAL Think Box badges and accents also use the product palette. */
+.hal-think-product-tag {
+  background:#183e68!important;
+  border-color:#4986c0!important;
+  color:#f2f7ff!important;
+}
+.hal-think-product-tag span{color:#c3d8ee!important}
+#intelligence .thinkbox-shot b {color:#ff9a37!important}
+#intelligence .thinkbox-shot:hover,
+#intelligence .thinkbox-shot:focus-visible{border-color:#ff9a37!important}
+/* Keep all Free Beta choices blue, even with the older green overrides. */
+.download-choice:not(.paid),
+.download-choice:not(.paid):has(input:checked){
+  background:#173e68!important;border-color:#477eb4!important;
+  color:#f0f7ff!important;box-shadow:none!important;
+}
+.download-choice:not(.paid):has(input:checked){border-color:#ff9a37!important;background:#285584!important}
+.download-choice:not(.paid):hover{background:#24588c!important;box-shadow:none!important}
+.download-choice:not(.paid) input{accent-color:#ff9a37!important}
+</style><style id="free-beta-green-restored-20261014">/* Free Beta selection buttons are green; other actions stay navy/blue/orange. */
+.download-choice:not(.paid){background:linear-gradient(180deg,#35e99c,#1ab976)!important;border:1px solid #68ffc0!important;color:#06291d!important;font-weight:900!important;box-shadow:0 2px 10px #16ca7730!important}
+.download-choice:not(.paid):hover{background:linear-gradient(180deg,#61f5b6,#22cc86)!important;border-color:#a1ffdc!important;box-shadow:0 0 14px #38e99a70!important}
+.download-choice:not(.paid):has(input:checked){background:linear-gradient(180deg,#8dffd0,#3ee7a0)!important;border-color:#b0ffe0!important;color:#042a1a!important;box-shadow:0 0 0 2px #45ef9c65!important}
+.download-choice:not(.paid) input{accent-color:#087e4a!important}
 </style></head><body>
 <header class="topbar"><div class="wrap nav"><a class="brand" href="index.html">BACKTEST <b><i>MECHANIC</i></b></a><nav class="links"><a href="#backtest-mechanic">Backtest Mechanic</a><a href="#free">Courtesy Cars</a><a href="#premium">The Showroom</a><a href="#chart">Advanced Chart</a><a href="#control">Control Panel</a><a href="#intelligence">HAL Intelligence</a><a href="#thinkbox">HAL Think Box</a><a href="#other">Coming Soon</a><a href="#beebot-banner">BeeBot + The HIVE</a></nav></div></header>
 <main class="wrap"><section aria-label="Introduction" class="hero"><div class="eyebrow">THE DEALERSHIP · DOWNLOADABLE DESKTOP SOFTWARE</div><h1>Welcome to <em>The Dealership.</em></h1><p>Start with Backtest Mechanic: create a brand-new strategy or bring one of our trading bots into the local workshop for testing and diagnostics. Then explore the fleet. Free bots? Those are our Courtesy Cars.</p></section>
