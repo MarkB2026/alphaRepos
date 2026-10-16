@@ -491,6 +491,42 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline-color:var(--toy
 #backtest-mechanic .btm-research-strip p{font-size:11px;color:#a8c3df;margin:7px 0 0}
 @media(max-width:950px){#backtest-mechanic .btm-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:590px){#backtest-mechanic .btm-feature-grid{grid-template-columns:1fr}#backtest-mechanic .btm-feature{padding:15px}}
+</style><style id="trader-anatomy-blue-silver-20261016">
+/* Trader Anatomy brand palette. Visual-only overrides; all scripts and controls preserved. */
+:root{--bg:#081321;--panel:#112943;--line:#345d84;--white:#edf5fd;--muted:#adc5dc;--cyan:#5db9f2;--green:#63b6ed;--gold:#b9d7ee;--toy-orange:#6bb8ed;--toy-green:#6bb8ed;--toy-blue:#5db9f2;--toy-purple:#88bde8;--toy-red:#86b7df;--toy-yellow:#c3d9ed}
+body{background:radial-gradient(ellipse at 72% -10%,#173e69 0%,#0a1a30 42%,#070f1c 100%);color:#edf5fd}
+.topbar{background:#08182af5;border-bottom-color:#315c88}
+.topbar .links a{color:#c8d9eb}.topbar .links a:hover,.topbar .brand b{color:#80c9f5!important}
+.hero h1 em,.eyebrow,.kicker,.heading .kicker,#free .heading .kicker,#premium .heading .kicker{color:#8bcafa!important}
+.hero p,.heading p,.lead,.feature p,.tile p{color:#bed2e5}
+.pill,.btm-download,#purchaseCart .createBtn,#bitcoinCheckout .btn:not(.gold):not(.secondary){background:linear-gradient(125deg,#d2e0ed,#74b9e9)!important;color:#081b30!important;border-color:#8ac7ef!important;box-shadow:0 5px 18px #216fa82b!important}
+.pill.secondary,.btm-secondary{background:#17395f!important;color:#ecf5ff!important;border:1px solid #4984b9!important}
+.product,.tile,.small-card,.feature,.btm-launch,.btm-compat,.beebot-roadmap-banner,.ownership-feature{background:linear-gradient(145deg,#17375b,#0c2037)!important;border-color:#396b99!important}
+.product:hover,.small-card:hover{border-color:#6db6e8!important}
+.glyph,.tile .symbol,.feature-visual .big,.btm-launch h2 span,.btm-tag,.btm-compat-kicker,.btm-check strong,.btm-compat .btm-compat-state,.btm-label{color:#87c7f1!important}
+.btm-launch::after{color:#4b9be615!important}
+.btm-check,.chart-privacy-line,#chart .adjustable-stop-note,#intelligence .thinkbox-beta{border-left-color:#63afe6!important}
+.btm-status{background:#142e49!important;border-color:#457eae!important;color:#d0e6f8!important}
+.btm-bot-badges span:last-child,.btm-path,.btm-check{background:#132f4c!important;border-color:#3d75a5!important}
+.actions button,.small-card button,.feature button,.slideshow-home-link,#intelligence .tile .actions button.more,#beebot-banner .tile .actions button.more{background:#183e67!important;border-color:#4a82b5!important;color:#eef7ff!important}
+.actions button:hover,.small-card button:hover,.feature button:hover,.slideshow-home-link:hover{background:#265987!important;border-color:#7bbdea!important}
+.download-choice:not(.paid),.download-choice:not(.paid):hover{background:linear-gradient(180deg,#357fbd,#205b91)!important;border-color:#76bce9!important;color:#f5faff!important;box-shadow:none!important}
+.download-choice:not(.paid):has(input:checked){background:linear-gradient(180deg,#63b4e9,#3485c4)!important;border-color:#c0e5fc!important;color:#061c31!important;box-shadow:0 0 0 2px #75c7ef50!important}
+.download-choice:not(.paid) input,.download-choice.paid input{accent-color:#65baf1!important}
+.download-choice.paid,.download-choice.paid:has(input:checked){background:#223b56!important;border-color:#779fbd!important;color:#e6f2ff!important}
+.download-choice.paid:has(input:checked){border-color:#b4dcf5!important;background:#315a7e!important}
+#bitcoinCheckout,#purchaseCart .box,.payment-panel,.restore{background:#102841!important;border-color:#386995!important}
+#bitcoinCheckout .head,#purchaseCart .free,.ownership-feature .ownership-caption strong,.ownership-arrow,.ownership-file{color:#a4d4f3!important}
+#bitcoinCheckout .btn.gold{background:linear-gradient(125deg,#c5d8ea,#79b5df)!important;border-color:#a6d0ec!important;color:#0a1c2d!important}
+#bitcoinCheckout .btn.secondary{background:#1b4169!important;border-color:#5488b6!important;color:#edf7ff!important}
+.bot-demo-thumb,.thinkbox-shot,.chart-thumb-strip a{border-color:#4677a2!important}
+.bot-demo-thumb:hover,.thinkbox-shot:hover,.chart-thumb-strip a:hover{border-color:#87c9f2!important}
+.bot-demo-thumb .bot-demo-play,#premium .bot-demo-play,#free .bot-demo-play,#other .bot-demo-play,#beebot-banner .bot-demo-play{border-color:#9dd6f8!important;color:#b4e1fb!important;background:#10365ad9!important;box-shadow:0 0 22px #429ce455!important}
+.hal-think-product-tag,.btm-compat-state{background:#193c61!important;border-color:#568fbd!important;color:#d8ecfc!important}
+#chart .chart-compact-list li::before,#intelligence .thinkbox-shot b{color:#8bcafa!important}
+button:focus-visible,a:focus-visible,input:focus-visible{outline-color:#8cccf3!important}
+/* Preserve the distinction between disabled and enabled actions. */
+button:disabled,.actions button:disabled{opacity:.45!important;cursor:not-allowed!important}
 </style></head><body>
 <header class="topbar"><div class="wrap nav"><a aria-label="Traders Toybox home" class="brand" href="index.html"><img alt="Traders Toybox" src="assets/logo.png"/></a><nav class="links"><a href="#backtest-mechanic">Backtest Mechanic</a><a href="#free">Free Trading Bots</a><a href="#premium">Trading Bots</a><a href="#chart">Advanced Chart</a><a href="#control">Control Panel</a><a href="#intelligence">HAL Intelligence</a><a href="#thinkbox">HAL Think Box</a><a href="#other">Coming Soon</a><a href="#beebot-banner">BeeBot + The HIVE</a></nav></div></header>
 <main class="wrap"><section aria-label="Introduction" class="hero"><div class="eyebrow">TRADERS TOYBOX · DOWNLOADABLE DESKTOP TRADING SOFTWARE</div><h1>Professional <em>Trading Tools.</em></h1><p>Explore trading bots, advanced charting, and strategy research software built for real trading workflows. Develop and test ideas with Backtest Mechanic, then select the execution and analysis tools that fit your approach.</p></section>
