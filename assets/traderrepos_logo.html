@@ -1,5 +1,58 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TraderRepository — Developer Terminal Logo</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TraderRepository — Developer Terminal Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b1018;color:#eaf0f4}.logo{display:flex;align-items:baseline;white-space:nowrap;font:500 clamp(20px,5vw,68px)/1.15 'JetBrains Mono','Fira Code','IBM Plex Mono','Cascadia Code','Consolas',monospace;letter-spacing:-.035em}.trader,.repos{color:#eaf0f4}.code{color:#31c6e8;margin:0 .32em;font-weight:600;letter-spacing:-.08em}.suffix{display:inline-block;color:#89919c;overflow:hidden;width:0;vertical-align:baseline;animation:type-in 1s steps(5,end) .65s forwards}.cursor{display:inline-block;width:.12em;height:.9em;background:#31c6e8;margin-left:.05em;vertical-align:-.09em;animation:blink 1s step-end infinite}@keyframes type-in{to{width:5ch}}@keyframes blink{50%{opacity:0}}@media(prefers-reduced-motion:reduce){.suffix{animation:none;width:5ch}.cursor{animation:none}}
-</style></head><body><div class="logo" role="img" aria-label="TraderRepository"><span class="trader">Trader</span><span class="code">&lt;/&gt;</span><span class="repos">Repos</span><span class="suffix">itory</span><span class="cursor" aria-hidden="true"></span></div></body></html>
+:root{
+  color-scheme:dark;
+  --bg:#0b1018;
+  --ink:#eaf0f4;      /* trader, repos */
+  --code:#31c6e8;     /* </> and cursor */
+  --suffix:#89919c;   /* itory */
+  --prompt:#3fb950;   /* terminal green */
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink)}
+
+.logo{
+  display:flex;align-items:baseline;white-space:nowrap;
+  font:700 clamp(20px,5vw,68px)/1.15 'JetBrains Mono','Fira Code','Cascadia Code','Consolas',monospace;
+  letter-spacing:-.02em;
+  text-shadow:0 0 .35em rgba(49,198,232,.12);   /* faint phosphor glow */
+}
+.prompt{color:var(--prompt);margin-right:.55em;font-weight:700}
+.trader,.repos{color:var(--ink)}
+.code{color:var(--code);margin:0 .18em}
+.suffix{
+  display:inline-block;overflow:hidden;vertical-align:baseline;
+  color:var(--suffix);font-weight:500;
+  width:0;
+  /* 5 characters, typed one at a time */
+  animation:type-in 1s steps(5,end) .9s forwards;
+}
+.cursor{
+  display:inline-block;width:.62em;height:1.02em;
+  background:var(--code);margin-left:.06em;
+  vertical-align:-.16em;border-radius:.06em;
+  animation:blink 1.06s steps(1,end) infinite;
+}
+@keyframes type-in{to{width:calc(5ch - 4 * .02em)}}
+@keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .suffix{animation:none;width:calc(5ch - 4 * .02em)}
+  .cursor{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="logo" role="img" aria-label="TraderRepository">
+  <span class="prompt" aria-hidden="true">&#10095;</span><span class="trader">trader</span><span class="code">&lt;/&gt;</span><span class="repos">repos</span><span class="suffix">itory</span><span class="cursor" aria-hidden="true"></span>
+</div>
+</body>
+</html>
