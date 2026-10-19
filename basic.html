@@ -614,7 +614,7 @@ body{background:#0b111c!important;color:#e6edf3!important;font:15px/1.55 system-
 <div aria-label="Momentum Bot claims MARA in shared local ownership JSON; Trend Bot checks the same registry and skips MARA while ZigZag Bot manages a different symbol." class="ownership-graphic" role="img">
 <div class="ownership-branch"><div class="ownership-bot">↗  MOMENTUM BOT <small>CLAIM MARA</small></div><div class="ownership-bot">╱  TREND BOT <small>CHECK MARA</small></div><div class="ownership-bot">⌁  ZIGZAG BOT <small>CLAIM WULF</small></div></div>
 <div aria-hidden="true" class="ownership-arrow">⇄</div><div class="ownership-registry"><div class="ownership-file">▤  ownership.json</div><div class="ownership-code"><span>{</span><span> "MARA": "Momentum Bot",</span><span> "WULF": "ZigZag Bot"</span><span>}</span></div><div class="ownership-status">✓ MARA OWNED   ·   TREND SKIPS</div></div>
-</div></aside><section class="section" id="purchaseCart"><div class="heading"><div><div class="kicker">SELECTED TOOLS</div><h2>Your selected bots</h2></div></div><div class="box"><h3>Selected downloads</h3><div id="selectedList"><p>No bots selected yet.</p></div><div class="note">Free Beta downloads cost $0. A single $1 USD beta purchase grants lifetime access to all current and future Premium products and updates. Prices shown in USD.</div></div><div class="box"><div class="free" id="readyLabel">MAKE A SELECTION</div><p id="selectionSummary">Choose a beta bot or add the free Control Center.</p><button class="createBtn" disabled="" id="continueSelection">CONTINUE WITH SELECTED ITEMS</button></div><div class="notice" id="recoveryShortcut">Already purchased Premium? Use Premium Upgrade below with your saved license key. Upgrade eligibility and limits are checked by the license server.</div><button class="pill secondary" id="openRecovery">PREMIUM UPGRADE</button></section><section class="section checkout" id="bitcoinCheckout" style="display:none">
+</div></aside><section class="section" id="purchaseCart"><div class="heading"><div><div class="kicker">SELECTED TOOLS</div><h2>Your selected bots</h2></div></div><div class="box"><h3>Selected downloads</h3><div id="selectedList"><p>No bots selected yet.</p></div><div class="note">Free Beta downloads cost $0. A single $1 USD beta purchase grants lifetime access to all current and future Premium products and updates. Prices shown in USD.</div></div><div class="box"><div class="free" id="readyLabel">MAKE A SELECTION</div><p id="selectionSummary">Choose a beta bot or add the free Control Center.</p><button class="createBtn" disabled="" id="continueSelection">CONTINUE WITH SELECTED ITEMS</button></div><div class="notice" id="recoveryShortcut">Already purchased Premium? Use Premium Upgrade below with your saved license key. Upgrade eligibility and limits are checked by the license server.</div><button class="pill secondary" id="openRecovery">REDEEM UPGRADE FROM LICENSE KEY</button></section><section class="section checkout" id="bitcoinCheckout" style="display:none">
 <div class="head">PREMIUM · BITCOIN CHECKOUT</div>
 <div class="body">
 <p>One $1 USD payment unlocks lifetime access to all current and future alphaRepos Premium products and updates as our thank-you for beta testing. Select any Premium product to proceed. Already purchased Premium? Do not pay again — restore your existing license below.</p>
@@ -628,10 +628,10 @@ body{background:#0b111c!important;color:#e6edf3!important;font:15px/1.55 system-
 <div class="license" hidden="" id="issuedLicense"><strong>✓ PAYMENT VERIFIED — SAVE THIS LICENSE KEY</strong><div style="margin:8px 0"><code id="licenseText"></code></div><button class="btn secondary" id="copyLicense">COPY LICENSE KEY</button> <button class="btn secondary" id="saveLicense">DOWNLOAD LICENSE KEY (.TXT)</button><p class="fine" style="margin:10px 0 0">Keep a backup of this file in a safe place. Anyone with your key may be able to use your Premium entitlement.</p></div>
 <button class="btn" disabled="" hidden="" id="premiumDownload">DOWNLOAD PREMIUM INSTALLER</button>
 </div>
-<div class="restore">
-<h3 style="margin-top:0">Premium Upgrade</h3>
+<div class="restore" hidden>
+<h3 style="margin-top:0">Redeem Upgrade From License Key</h3>
 <p>Enter your saved Premium license key to check upgrade eligibility and download an available Premium version. Keep your license key safe — it cannot be replaced here.</p>
-<div class="restore-row"><input autocomplete="off" id="restoreKey" placeholder="Your Premium license key"/><button class="btn secondary" id="restoreBtn">CHECK LICENSE</button></div>
+<div class="restore-row"><input autocomplete="off" id="restoreKey" placeholder="Your Premium license key"/><button class="btn secondary" id="restoreBtn">REDEEM UPGRADE</button></div>
 <div class="status" id="restoreStatus"></div>
 <button class="btn" disabled="" hidden="" id="restoredDownload">DOWNLOAD PREMIUM INSTALLER</button>
 </div>
@@ -815,14 +815,10 @@ $('statusBtn').onclick=async()=>{
 $('copyLicense').onclick=()=>{if(premiumKey)navigator.clipboard.writeText(premiumKey).then(()=>setStatus('paymentStatus','License key copied. Store it securely.'))};
 $('saveLicense').onclick=()=>{if(!licensePattern.test(premiumKey||''))return;const content='alphaRepos Lifetime Premium License\n\nLicense Key: '+premiumKey+'\n\nKeep this file private and backed up. Your key is needed for future Premium downloads and reinstalls.\n';const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const link=document.createElement('a');const objectUrl=URL.createObjectURL(blob);link.href=objectUrl;link.download='alphaRepos_Premium_License.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);setStatus('paymentStatus','License key file download requested. Save a backup somewhere safe.');};
 $('premiumDownload').onclick=async()=>{try{await installer('premium',premiumKey);setStatus('paymentStatus','Premium installer download requested.')}catch(e){setStatus('paymentStatus',e.message,true)}};
-$('restoreBtn').onclick=async()=>{
-  const key=$('restoreKey').value.trim().toUpperCase();if(!licensePattern.test(key)){setStatus('restoreStatus','Enter your complete original Premium license key.',true);return}
-  const b=$('restoreBtn');$('restoredDownload').hidden=true;$('restoredDownload').disabled=true;b.disabled=true;setStatus('restoreStatus','Checking your license…');
-  try{const r=await fetch(WORKER+'/premium/recover',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({license_key:key})}),v=await r.json();if(!r.ok||!v.ok||!v.active)throw Error(v.error||'License not active');premiumKey=key;$('restoredDownload').disabled=false;$('restoredDownload').hidden=false;setStatus('restoreStatus','✓ License accepted. Premium download is available.')}
-  catch(e){setStatus('restoreStatus','Premium upgrade unavailable: '+e.message,true)}
-  finally{b.disabled=false}
-};
-$('restoredDownload').onclick=async()=>{try{await installer('premium',premiumKey);setStatus('restoreStatus','Premium installer download requested.')}catch(e){setStatus('restoreStatus',e.message,true)}};
+// The legacy /premium/recover route consumes an allowance during validation.
+// Do not call it until the new read-only status and confirmed redemption API are deployed.
+$('restoreBtn').onclick=()=>document.getElementById('upgradeDialog').showModal();
+$('restoredDownload').hidden=true;
 </script><script id="cosmetic-cart-bridge">(function(){
  const cart=document.getElementById('purchaseCart');
  const control=document.getElementById('controlCenterPick');
@@ -852,7 +848,7 @@ $('restoredDownload').onclick=async()=>{try{await installer('premium',premiumKey
  document.querySelectorAll('#legacyPurchaseSelectors .edition').forEach(r=>r.addEventListener('change',syncFromLegacy));
  if(control)control.addEventListener('change',syncFromLegacy);
  document.getElementById('openRecovery').addEventListener('click',()=>{
-   const checkout=document.getElementById('bitcoinCheckout');checkout.style.display='block';checkout.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('restoreKey').focus({preventScroll:true});
+   document.getElementById('upgradeDialog').showModal();document.getElementById('upgradeKey').focus();
  });
  syncFromLegacy();
 })();</script><script>
@@ -864,4 +860,40 @@ document.querySelectorAll('.checkout-product').forEach(card=>{
     });
   }));
 });
-</script></body></html>
+</script>
+<style id="upgrade-dialog-styles">
+#upgradeDialog{width:min(520px,calc(100vw - 28px));max-height:90vh;overflow:auto;border:1px solid #42677d;border-radius:15px;background:#0d2030;color:#e9f7ff;padding:25px;box-shadow:0 25px 80px #000a}
+#upgradeDialog::backdrop{background:#000b}#upgradeDialog h2{margin:0 0 8px;font-size:24px}#upgradeDialog p{color:#b9ceda;font-size:14px;line-height:1.5}#upgradeDialog input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #4a7185;background:#091a27;border-radius:7px;color:white;margin:8px 0 10px}#upgradeDialog .upgrade-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}#upgradeDialog button{padding:11px 14px;border-radius:7px;border:1px solid #4e7a90;background:#1b455a;color:white;font-weight:800;cursor:pointer}#upgradeDialog button:disabled{opacity:.45;cursor:not-allowed}#upgradeDialog .upgrade-status-table{width:100%;border-collapse:collapse;margin:16px 0}#upgradeDialog td{padding:9px 5px;border-bottom:1px solid #294456;font-size:14px}#upgradeDialog td:last-child{text-align:right;font-weight:700}#upgradeDialog .upgrade-error{color:#ffb3a9}#upgradeDialog .upgrade-verified{color:#a6efc4}#upgradeDialog .upgrade-confirm{background:#246b4f}
+</style>
+<dialog id="upgradeDialog" aria-labelledby="upgradeDialogTitle">
+<h2 id="upgradeDialogTitle">Redeem Premium Upgrade</h2>
+<p>Enter the license key you saved after purchase. Checking your status is free and does not use an upgrade.</p>
+<label for="upgradeKey">Premium license key</label><input id="upgradeKey" autocomplete="off" spellcheck="false" placeholder="MBB-…"/>
+<div class="upgrade-actions"><button type="button" id="upgradeCheck">CHECK UPGRADE STATUS</button><button type="button" id="upgradeClose">CANCEL</button></div>
+<div id="upgradeStatusMessage" role="status" aria-live="polite"></div>
+<section id="upgradeVerifiedPanel" hidden>
+<table class="upgrade-status-table"><tbody>
+<tr><td>Bot</td><td id="upgradeBot">—</td></tr>
+<tr><td>License</td><td id="upgradeLicense">—</td></tr>
+<tr><td>Upgrades used</td><td id="upgradeUsed">—</td></tr>
+<tr><td>Upgrades remaining</td><td id="upgradeRemaining">—</td></tr>
+<tr><td>Cost</td><td>FREE</td></tr>
+</tbody></table>
+<p>Redeeming this upgrade will use one of your remaining free upgrades. Continue?</p>
+<button type="button" class="upgrade-confirm" id="upgradeConfirm" disabled>CONFIRM FREE UPGRADE</button>
+</section>
+</dialog>
+<script id="upgrade-dialog-behavior">(function(){
+ const $=id=>document.getElementById(id), dialog=$('upgradeDialog'), key=$('upgradeKey'), status=$('upgradeStatusMessage');
+ $('upgradeClose').addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('close',()=>{$('upgradeVerifiedPanel').hidden=true;status.textContent='';key.value='';});
+ $('upgradeCheck').addEventListener('click',async()=>{
+   $('upgradeVerifiedPanel').hidden=true;
+   $('upgradeConfirm').disabled=true;
+   const license=key.value.trim().toUpperCase();
+   if(!/^MBB-[A-F0-9]{8}(?:-[A-F0-9]{8}){7}$/.test(license)){status.textContent='Enter your complete Premium license key.';status.className='upgrade-error';return;}
+   status.textContent='Upgrade status lookup will be enabled when the Worker and per-bot database are updated. No upgrade has been used.';
+   status.className='';
+ });
+})();</script>
+</body></html>
