@@ -28,31 +28,36 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--
 .prompt{color:var(--prompt);margin-right:.55em;font-weight:700}
 .trader,.repos{color:var(--ink)}
 .code{color:var(--code);margin:0 .18em}
-.suffix{
-  display:inline-block;overflow:hidden;vertical-align:baseline;
-  color:var(--suffix);font-weight:500;
-  width:0;
-  /* 5 characters, typed one at a time */
-  animation:type-in 1s steps(5,end) .9s forwards;
-}
+.suffix{color:var(--suffix);font-weight:500}
 .cursor{
-  display:inline-block;width:.62em;height:1.02em;
-  background:var(--code);margin-left:.06em;
-  vertical-align:-.16em;border-radius:.06em;
+  display:inline-block;width:.6em;height:.94em;
+  background:var(--code);margin-left:.08em;
+  vertical-align:-.2em;border-radius:.06em;
   animation:blink 1.06s steps(1,end) infinite;
 }
-@keyframes type-in{to{width:calc(5ch - 4 * .02em)}}
+.typing .cursor{animation:none}   /* solid while typing, like a real terminal */
 @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
 
 @media (prefers-reduced-motion:reduce){
-  .suffix{animation:none;width:calc(5ch - 4 * .02em)}
   .cursor{animation:none}
 }
 </style>
 </head>
 <body>
 <div class="logo" role="img" aria-label="TraderRepository">
-  <span class="prompt" aria-hidden="true">&#10095;</span><span class="trader">trader</span><span class="code">&lt;/&gt;</span><span class="repos">repos</span><span class="suffix">itory</span><span class="cursor" aria-hidden="true"></span>
+  <span class="prompt" aria-hidden="true">&#10095;</span><span class="trader">trader</span><span class="code">&lt;/&gt;</span><span class="repos">repos</span><span class="suffix" data-text="itory"></span><span class="cursor" aria-hidden="true"></span>
 </div>
+<script>
+(function(){
+  var logo=document.querySelector('.logo'), el=logo.querySelector('.suffix'), text=el.dataset.text;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent=text; return; }
+  var i=0, start=900, step=190;                 // pause, then one character every 190ms
+  logo.classList.add('typing');
+  setTimeout(function type(){
+    el.textContent=text.slice(0,++i);
+    if(i<text.length) setTimeout(type,step); else logo.classList.remove('typing');
+  },start);
+})();
+</script>
 </body>
 </html>
