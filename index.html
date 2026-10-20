@@ -91,11 +91,12 @@ html{color-scheme:dark}body{background:#0b111c!important;color:#e6edf3!important
   if(!logo)return;
   var el=logo.querySelector('.tr-suffix'), value=el.dataset.text;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=value;return;}
+  var BLINK=1060; // one complete cursor blink before typing starts
   var i=0;
-  logo.classList.add('tr-typing');
   setTimeout(function type(){
+    logo.classList.add('tr-typing'); // keep cursor solid during typing
     el.textContent=value.slice(0,++i);
     if(i<value.length)setTimeout(type,190);
     else logo.classList.remove('tr-typing');
-  },900);
+  },BLINK);
 })();</script></body></html>
