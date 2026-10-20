@@ -51,9 +51,10 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--
 (function(){
   var logo=document.querySelector('.logo'), el=logo.querySelector('.suffix'), text=el.dataset.text;
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent=text; return; }
-  var i=0, start=900, step=190;                 // pause, then one character every 190ms
-  logo.classList.add('typing');
+  var BLINK=1060;                               // one full blink cycle (matches the CSS animation)
+  var i=0, start=BLINK, step=190;               // blink once (on, off), then type one character every 190ms
   setTimeout(function type(){
+    logo.classList.add('typing');               // cursor holds solid while typing
     el.textContent=text.slice(0,++i);
     if(i<text.length) setTimeout(type,step); else logo.classList.remove('typing');
   },start);
