@@ -821,7 +821,7 @@ $('quoteBtn').onclick=async()=>{
     if(total!==1)throw Error('Select a Premium product to unlock lifetime all-access for $1 USD.');
     quote=null;
     const url=WORKER+'/premium/quote?amount_usd='+encodeURIComponent(total);
-    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({}),cache:'no-store'}),q=await r.json();
+    const r=await fetch(url,{method:'GET',cache:'no-store'}),q=await r.json();
     if(!r.ok||!q.ok)throw Error(q.error||'Could not create quote');
     const serverUsd=quotedUsd(q);
     if(serverUsd===null && total!==1)throw Error('The payment server did not confirm the $'+total.toFixed(2)+' USD cart total. No Bitcoin amount can be safely issued for multiple upgrades until the Worker supports itemized totals.');
