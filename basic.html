@@ -720,6 +720,20 @@ body{background:#0b111c!important;color:#e6edf3!important;font:15px/1.55 system-
   border-color:#93bce0!important;
 }
 #checkoutCatalog .checkout-choice input,.download-choice input {accent-color:#80b5e0!important}
+
+/* Clearly visible steel-blue highlight on top navigation links. */
+.topbar .links a {
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:8px 10px;border:1px solid transparent;border-radius:7px;
+  background:transparent;color:#d7e6f7!important;
+  transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,color .16s ease;
+}
+.topbar .links a:hover,.topbar .links a:focus-visible {
+  background:#244d77!important;border-color:#74b8ee!important;
+  color:#ffffff!important;box-shadow:0 0 0 1px #5ca8e555,0 0 14px #459ee455!important;
+  text-decoration:none!important;
+}
+.topbar .links a:active {background:#316493!important;border-color:#a2d3ff!important;}
 </style>
 </head><body>
 <header class="topbar"><div class="wrap nav"><a aria-label="Trader Repository homepage" class="repo-wordmark" href="index.html"><span class="repo-wordmark-lines"><span class="repo-title"><span class="repo-mark">&lt;/&gt;</span> trader <span class="repo-blue">repository</span></span><small>// trading software for download</small></span></a><nav class="links"><a href="#backtest-mechanic">Backtest Mechanic</a><a href="#free">Free Trading Bots</a><a href="#premium">Trading Bots</a><a href="#chart">Advanced Chart</a><a href="#control">Control Panel</a><a href="#intelligence">HAL Intelligence</a><a href="#thinkbox">HAL Think Box</a><a href="#other">Coming Soon</a><a href="#beebot-banner">BeeBot + The HIVE</a></nav></div></header>
