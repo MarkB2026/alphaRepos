@@ -13,7 +13,7 @@ if(!document.querySelector("header.top")){
 document.querySelectorAll("body > header,body > div > header").forEach(el=>el.remove());
 const header=document.createElement("header");header.className="top";header.innerHTML='<div class="wrap"><div><a class="brand" href="/index.html">trader <b>&lt;/&gt; repository</b></a><div class="tagline">// trading software for download</div></div><nav class="nav" aria-label="Main navigation"><a href="/index.html">Repository</a><a href="/basic.html">Checkout</a><a href="/packages.html">Packages</a><a href="'+slideUrl+'">Slideshows</a></nav></div>';body.insertBefore(header,body.firstChild);
 }
-main.classList.add("wrap");if(main.parentElement!==body){body.append(main);}
+main.classList.add("wrap");// Preserve each page’s original DOM hierarchy and existing footer placement.
 if(!main.querySelector(".breadcrumb")){const crumb=document.createElement("div");crumb.className="breadcrumb";crumb.textContent="REPOSITORY / PRODUCTS / "+page.toUpperCase().replace(/-/g,"-");main.prepend(crumb);}
 const mainTitle=main.querySelector("h1");if(mainTitle&&mainTitle.parentElement!==main){main.insertBefore(mainTitle,main.children[1]||null);}
 if(mainTitle&&!main.querySelector(".status")){const status=document.createElement("div");status.className="status";status.textContent="PRODUCT INFORMATION · SEE CHECKOUT FOR RELEASE AVAILABILITY";mainTitle.after(status);}
