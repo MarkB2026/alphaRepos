@@ -2,7 +2,7 @@
    Information stays specific to each product; all media lives in Slideshows. */
 :root{color-scheme:dark}
 body.tr-product-standard{margin:0;background:#0b111c;color:#e5edf6;font:15px/1.65 system-ui,"Segoe UI",sans-serif}
-body.tr-product-standard .top{background:#0e1825;border-bottom:1px solid #2d4054;padding:15px 0}
+body.tr-product-standard header.top{width:100%;max-width:none;margin:0}\nbody.tr-product-standard .top{background:#0e1825;border-bottom:1px solid #2d4054;padding:15px 0}
 body.tr-product-standard .top .wrap{width:min(1150px,calc(100% - 36px));margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
 body.tr-product-standard .top .brand{font:700 20px ui-monospace,Consolas,monospace;color:#f2f6ff;text-decoration:none}
 body.tr-product-standard .top .brand b{color:#57b5ec}
