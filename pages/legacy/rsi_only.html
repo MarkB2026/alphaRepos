@@ -1,0 +1,1858 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer>
+</script>
+
+<title>Legacy RSI Threshold Builder | MyBotBuilder</title>
+
+<style>
+
+/* =========================================================
+   WHY LOCAL-FIRST POPUP
+   ========================================================= */
+
+.local-info-button {
+  background:#071b2b;
+  color:#7ddcff;
+  border:1px solid #28536a;
+  border-radius:8px;
+  padding:11px 18px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.06em;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.local-info-button:hover {
+  background:#0b2a40;
+  border-color:#55d8ff;
+  box-shadow:0 0 18px rgba(85,216,255,.16);
+}
+
+.local-modal {
+  display:none;
+  position:fixed;
+  z-index:9999;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(4px);
+  padding:30px 18px;
+  overflow-y:auto;
+}
+
+.local-modal.open {
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.local-modal-box {
+  position:relative;
+  width:min(900px,100%);
+  margin:auto;
+  background:#071016;
+  border:1px solid #168ee0;
+  border-radius:14px;
+  padding:34px;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.65),
+    0 0 35px rgba(22,142,224,.10);
+}
+
+.local-modal-close {
+  position:absolute;
+  top:14px;
+  right:18px;
+  width:40px;
+  height:40px;
+  border:0;
+  background:transparent;
+  color:#7ddcff;
+  font-size:32px;
+  line-height:1;
+  cursor:pointer;
+}
+
+.local-modal-close:hover {
+  color:#fff;
+}
+
+.local-modal-eyebrow {
+  margin:0 0 8px;
+  color:#55d8ff;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+
+.local-modal-box h2 {
+  margin:0 45px 12px 0;
+  color:#fff;
+  font-size:30px;
+}
+
+.local-modal-intro {
+  max-width:760px;
+  margin:0 0 26px;
+  color:#b7c8d2;
+  line-height:1.65;
+}
+
+.local-benefits {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.local-benefit {
+  background:#071b2b;
+  border:1px solid #1c4f70;
+  border-radius:10px;
+  padding:18px;
+}
+
+.local-benefit strong {
+  display:block;
+  margin-bottom:8px;
+  color:#7ddcff;
+  font-size:13px;
+  letter-spacing:.045em;
+}
+
+.local-benefit p {
+  margin:0;
+  color:#b7c8d2;
+  line-height:1.55;
+  font-size:14px;
+}
+
+.local-benefit p + p {
+  margin-top:10px;
+}
+
+.hive-benefit {
+  grid-column:1 / -1;
+  border-color:#168ee0;
+}
+
+.local-modal-bottom {
+  margin-top:18px;
+  padding:20px;
+  text-align:center;
+  background:#071b2b;
+  border:1px solid #168ee0;
+  border-radius:10px;
+}
+
+.local-modal-bottom strong {
+  display:block;
+  color:#55d8ff;
+  font-size:16px;
+  letter-spacing:.07em;
+  margin-bottom:7px;
+}
+
+.local-modal-bottom span {
+  display:block;
+  color:#c3d3dc;
+  line-height:1.5;
+}
+
+@media (max-width:700px) {
+
+  .local-modal-box {
+    padding:26px 18px;
+  }
+
+  .local-benefits {
+    grid-template-columns:1fr;
+  }
+
+  .hive-benefit {
+    grid-column:auto;
+  }
+
+  .local-modal-box h2 {
+    font-size:25px;
+  }
+}
+
+
+/* ============================================================
+   CSS DEPLOYMENT INDICATOR
+   ============================================================ */
+
+body {
+  border-top:10px solid green !important;
+}
+
+body{
+  margin:0;
+  background:#05090d;
+  color:#eef7fb;
+  font:16px Arial,sans-serif;
+}
+
+.wrap{
+  max-width:820px;
+  margin:50px auto;
+  padding:28px;
+}
+
+.card{
+  background:#0c141b;
+  border:1px solid #1c3b4c;
+  border-radius:16px;
+  padding:28px;
+  box-shadow:0 18px 60px #0008;
+}
+
+h1{
+  margin:0 0 8px;
+  font-size:32px;
+}
+
+h2{
+  margin:30px 0 15px;
+  font-size:18px;
+  color:#7ddcff;
+  border-bottom:1px solid #1c3b4c;
+  padding-bottom:8px;
+}
+
+p{
+  color:#9fb4c0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+label{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:#7ddcff;
+}
+
+select,
+input{
+  background:#071b2b;
+  color:#fff;
+  border:1px solid #28536a;
+  border-radius:8px;
+  padding:12px;
+  font-size:15px;
+}
+
+
+/* ============================================================
+   PRIMARY BUTTON — BLUE
+   ============================================================ */
+
+button{
+  width:100%;
+  margin-top:28px;
+  padding:15px;
+  border:1px solid #21c8ff;
+  border-radius:10px;
+  background:#0787bd;
+  color:#ffffff;
+  font-weight:900;
+  font-size:16px;
+  letter-spacing:.03em;
+  cursor:pointer;
+  box-shadow:
+    0 0 20px rgba(0,174,239,.20),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  transition:.2s ease;
+}
+
+button:hover{
+  background:#0999d4;
+  border-color:#63ddff;
+  box-shadow:
+    0 0 26px rgba(0,174,239,.32),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+
+/* ============================================================
+   BUILDING BUTTON — GREEN
+   ============================================================ */
+
+button.building{
+  background:#168a45;
+  border-color:#3ee47d;
+  color:#ffffff;
+  box-shadow:
+    0 0 22px rgba(62,228,125,.25),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  cursor:wait;
+}
+
+button.building:hover{
+  background:#168a45;
+  border-color:#3ee47d;
+}
+
+
+/* ============================================================
+   DOWNLOAD READY BUTTON — BLUE + PULSE
+   ============================================================ */
+
+button.download-ready{
+  background:#0787bd;
+  border:2px solid #63ddff;
+  color:#ffffff;
+  cursor:pointer;
+  animation:downloadPulse 1.4s ease-in-out infinite;
+}
+
+button.download-ready:hover{
+  background:#0999d4;
+  border-color:#ffffff;
+}
+
+@keyframes downloadPulse{
+
+  0%{
+    box-shadow:
+      0 0 12px rgba(85,216,255,.25),
+      inset 0 1px 0 rgba(255,255,255,.08);
+  }
+
+  50%{
+    box-shadow:
+      0 0 34px rgba(85,216,255,.70),
+      0 0 12px rgba(85,216,255,.40),
+      inset 0 1px 0 rgba(255,255,255,.12);
+  }
+
+  100%{
+    box-shadow:
+      0 0 12px rgba(85,216,255,.25),
+      inset 0 1px 0 rgba(255,255,255,.08);
+  }
+}
+
+
+/* ============================================================
+   REVIEW BUTTON STAYS DARK
+   ============================================================ */
+
+.review-button{
+  background:#0d2531;
+  color:#7ddcff;
+  border:1px solid #28536a;
+  box-shadow:none;
+}
+
+.review-button:hover{
+  background:#123545;
+  border-color:#55d8ff;
+  box-shadow:none;
+}
+
+.note{
+  font-size:13px;
+  margin-top:16px;
+}
+
+.warning{
+  margin-top:22px;
+  padding:16px;
+  background:#241b08;
+  border:1px solid #72591c;
+  border-radius:9px;
+  color:#e9d9a4;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+
+/* ============================================================
+   BOT REVIEW
+   ============================================================ */
+
+.review-panel{
+  display:none;
+  margin-top:28px;
+  padding:24px;
+  background:#071b2b;
+  border:1px solid #168ee0;
+  border-radius:12px;
+  box-shadow:0 10px 30px #0006;
+}
+
+.review-panel.show{
+  display:block;
+}
+
+.review-title{
+  margin:0 0 20px;
+  color:#eef7fb;
+  font-size:23px;
+}
+
+.review-section{
+  padding:14px 0;
+  border-top:1px solid #1c3b4c;
+}
+
+.review-section:first-of-type{
+  border-top:0;
+}
+
+.review-label{
+  display:block;
+  margin-bottom:7px;
+  color:#7ddcff;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.review-value{
+  color:#eef7fb;
+  line-height:1.6;
+}
+
+.review-live-warning{
+  display:none;
+  margin-top:18px;
+  padding:16px;
+  background:#241b08;
+  border:1px solid #72591c;
+  border-radius:9px;
+  color:#e9d9a4;
+  line-height:1.5;
+}
+
+.review-live-warning.show{
+  display:block;
+}
+
+
+/* ============================================================
+   WHY BUILD A TRADING BOT
+   ============================================================ */
+
+.why-bot{
+  margin-top:48px;
+}
+
+.why-bot-header{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto 28px;
+}
+
+.why-bot-header h1{
+  margin:8px 0 12px;
+  font-size:30px;
+}
+
+.why-bot-header p{
+  line-height:1.6;
+}
+
+.why-label{
+  color:#7ddcff;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.18em;
+}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.why-card{
+  background:#071b2b;
+  border:1px solid #1c4f70;
+  border-radius:12px;
+  padding:22px;
+}
+
+.why-card h3{
+  margin:0 0 10px;
+  color:#eef7fb;
+  font-size:17px;
+}
+
+.why-card p{
+  margin:0;
+  line-height:1.55;
+  font-size:14px;
+}
+
+.why-bottom{
+  text-align:center;
+  margin-top:18px;
+  padding:26px;
+  background:#071b2b;
+  border:1px solid #168ee0;
+  border-radius:12px;
+}
+
+.why-bottom h2{
+  margin:0 0 10px;
+  padding:0;
+  border:0;
+  font-size:22px;
+  color:#7ddcff;
+}
+
+.why-bottom p{
+  margin:0;
+  line-height:1.55;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media(max-width:600px){
+
+  .grid,
+  .why-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+/* ============================================================
+   BOT BUILD PROGRESS
+   ============================================================ */
+
+.build-progress{
+  display:none;
+  margin-top:18px;
+  padding:20px;
+  border:1px solid #28734a;
+  border-radius:10px;
+  background:#07140e;
+  box-shadow:0 0 20px rgba(62,228,125,.08);
+  transition:.3s ease;
+}
+
+.build-progress-title{
+  margin-bottom:14px;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:#55e98d;
+}
+
+
+/* CIRCULAR BUILD SPINNER */
+
+.build-progress-bar{
+  width:100px;
+  height:100px;
+  margin:18px auto;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  overflow:visible;
+}
+
+.build-progress-fill{
+  box-sizing:border-box;
+  width:100px;
+  height:100px;
+  margin:0;
+  border-radius:50%;
+  border:7px solid #173342;
+  border-top-color:#55d8ff;
+  background:transparent;
+  box-shadow:0 0 18px rgba(85,216,255,.22);
+  animation:buildSpinner .85s linear infinite;
+  position:relative;
+}
+.build-progress-fill::after{
+  content:"Building...";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:900;
+  color:#bdefff;
+  letter-spacing:.02em;
+  animation:counterSpin .85s linear infinite;
+}
+
+@keyframes counterSpin{
+  to{ transform:rotate(-360deg); }
+}
+@keyframes buildSpinner{
+  to{ transform:rotate(360deg); }
+}
+
+/* SUCCESS CHECK */
+
+.build-progress-fill.complete{
+  position:relative;
+  width:54px;
+  height:54px;
+  margin:0;
+  animation:none;
+  transform:none;
+  border:3px solid #3ee47d;
+  background:transparent;
+  box-shadow:0 0 18px rgba(62,228,125,.35);
+}
+
+.build-progress-fill.complete::after{
+  content:"";
+  position:absolute;
+  left:14px;
+  top:8px;
+  width:14px;
+  height:25px;
+  border:solid #65f59a;
+  border-width:0 5px 5px 0;
+  transform:rotate(45deg);
+}
+
+/* FAILED X */
+
+.build-progress.failed{
+  border:2px solid #ff4d57;
+  background:#20090c;
+  box-shadow:
+    0 0 30px rgba(255,77,87,.18),
+    inset 0 0 24px rgba(255,77,87,.04);
+}
+
+.build-progress.failed .build-progress-title{
+  color:#ff626b;
+  font-size:18px;
+  text-align:center;
+}
+
+.build-progress.failed .build-progress-bar{
+  border:0;
+}
+
+.build-progress-fill.failed{
+  position:relative;
+  width:54px;
+  height:54px;
+  margin:0;
+  animation:none;
+  transform:none;
+  border:3px solid #ff4d57;
+  background:transparent;
+  box-shadow:0 0 18px rgba(255,77,87,.32);
+}
+
+.build-progress-fill.failed::before,
+.build-progress-fill.failed::after{
+  content:"";
+  position:absolute;
+  left:23px;
+  top:10px;
+  width:4px;
+  height:29px;
+  border-radius:3px;
+  background:#ff626b;
+}
+
+.build-progress-fill.failed::before{ transform:rotate(45deg); }
+.build-progress-fill.failed::after{ transform:rotate(-45deg); }
+
+.build-progress.failed .build-progress-note{
+  color:#d99aa0;
+}
+
+/* ============================================================
+   COMPLETED / READY PANEL
+   ============================================================ */
+
+.build-progress.ready{
+  border:2px solid #3ee47d;
+  background:#082015;
+  box-shadow:
+    0 0 30px rgba(62,228,125,.22),
+    inset 0 0 24px rgba(62,228,125,.04);
+  animation:readyPanelFlash .7s ease-out 2;
+}
+
+.build-progress.ready .build-progress-title{
+  color:#65f59a;
+  font-size:18px;
+  text-align:center;
+  letter-spacing:1.2px;
+}
+
+@keyframes readyPanelFlash{
+
+  0%{
+    box-shadow:0 0 10px rgba(62,228,125,.10);
+  }
+
+  50%{
+    box-shadow:0 0 42px rgba(62,228,125,.45);
+  }
+
+  100%{
+    box-shadow:0 0 30px rgba(62,228,125,.22);
+  }
+}
+
+
+.build-progress-steps{
+  margin-top:16px;
+  line-height:1.9;
+  font-size:13px;
+  color:#c8dce7;
+}
+
+.build-progress-note{
+  margin-top:10px;
+  font-size:12px;
+  color:#7895a5;
+}
+
+</style>
+
+<body>
+
+<!-- ============================================================
+     WHY LOCAL-FIRST POPUP
+     ============================================================ -->
+
+<div id="localInfoModal" class="local-modal" onclick="closeLocalInfoOutside(event)">
+  <div class="local-modal-box">
+
+    <button
+      type="button"
+      class="local-modal-close"
+      onclick="closeLocalInfo()"
+      aria-label="Close">
+      &times;
+    </button>
+
+    <p class="local-modal-eyebrow">YOUR BOT. YOUR COMPUTER. YOUR CONTROL.</p>
+
+    <h2>Your trading bot runs on your computer.</h2>
+
+    <p class="local-modal-intro">
+      BuildATradingBot takes a different approach from typical cloud trading
+      platforms. Your bot is built as a Windows application that you download,
+      install and run locally on your own computer.
+    </p>
+
+    <div class="local-benefits">
+
+      <div class="local-benefit">
+        <strong>DIRECT BROKER CONNECTION</strong>
+        <p>
+          Your bot connects directly to your locally running trading platform.
+          With the platform signed in and the required API settings enabled,
+          the bot can connect automatically using its configured local
+          connection settings.
+        </p>
+      </div>
+
+      <div class="local-benefit">
+        <strong>NO BROKER LOGIN ENTERED</strong>
+        <p>
+          Your broker username and password are never entered into
+          BuildATradingBot.com. Only the connection information required
+          for the local API connection is configured.
+        </p>
+      </div>
+
+      <div class="local-benefit">
+        <strong>INDEPENDENT OPERATION</strong>
+        <p>
+          Once installed, your bot does not depend on BuildATradingBot.com
+          being online. Start it, stop it and run it directly from your computer.
+        </p>
+      </div>
+
+      <div class="local-benefit">
+        <strong>YOUR DATA STAYS LOCAL</strong>
+        <p>
+          Trading history, scans, decisions, settings and bot data can remain
+          in your bot's own local database instead of requiring your complete
+          trading activity to be stored on our servers.
+        </p>
+      </div>
+
+      <div class="local-benefit hive-benefit">
+        <strong>OPTIONAL SHARED DATABASE — THE HIVE</strong>
+        <p>
+          Local doesn't mean isolated. Participating bots can optionally connect
+          to The Hive, a shared network database.
+        </p>
+        <p>
+          Bots that choose to contribute structured trade data can benefit from
+          the growing pool of data contributed by other participating bots,
+          including community candidates and similar historical trades.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="local-modal-bottom">
+      <strong>LOCAL EXECUTION. SHARED INTELLIGENCE.</strong>
+      <span>
+        Your computer runs the bot. The Hive optionally connects it
+        to the knowledge of the network.
+      </span>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap">
+
+
+<!-- ============================================================
+     BOT BUILDER
+     ============================================================ -->
+
+<div class="card">
+
+<h1>RSI THRESHOLD BUILDER</h1><div style="padding:15px;margin:14px 0;border:1px solid #39bde6;border-radius:9px;background:#102d3d;color:#e6f6ff"><strong>Looking for the RSI Divergence Reversal Bot?</strong><p>This is the older RSI threshold builder, which uses RSI above/below conditions rather than divergence detection.</p><a href="/basic.html?v=1.6.1" style="display:inline-block;padding:11px 16px;border-radius:7px;background:#139bc4;color:white;font-weight:bold;text-decoration:none">OPEN RSI DIVERGENCE BUILDER →</a></div>
+
+<p>
+Configure a simple RSI trading bot with broker connection
+and trailing-stop protection.
+</p>
+
+<button type="button" class="local-info-button" onclick="openLocalInfo()">
+  WHY YOUR BOT RUNS LOCALLY
+</button>
+
+
+<h2>BOT</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>Bot name</label>
+<input id="bot_name" value="MARA RSI Bot">
+</div>
+
+<div class="field">
+<label>Symbol</label>
+<input id="symbol" value="MARA">
+</div>
+
+<div class="field">
+<label>Direction</label>
+<select id="direction">
+<option>LONG</option>
+<option>SHORT</option>
+</select>
+</div>
+
+<div class="field">
+<label>Quantity</label>
+<input id="quantity" type="number" min="1" value="1">
+</div>
+
+</div>
+
+
+<h2>BROKER CONNECTION</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>Broker</label>
+<select id="broker" onchange="updateBrokerFields()">
+<option value="IBKR">Interactive Brokers (IBKR)</option>
+<option value="MT5" disabled>MetaTrader 5 (MT5) — COMING SOON</option>
+</select>
+</div>
+
+<div class="field ibkr-field">
+<label>Host</label>
+<input id="host" value="127.0.0.1">
+</div>
+
+<div class="field ibkr-field">
+<label>Port</label>
+<input id="port" type="text" value="7497" readonly
+       style="background:#10171c; color:#7f929d; cursor:not-allowed;">
+</div>
+
+<div class="field ibkr-field">
+<label>Client ID</label>
+<input id="client_id" type="number" value="91">
+</div>
+
+<div id="mt5_info" class="field full" style="display:none;">
+<label>MT5 CONNECTION</label>
+<div style="
+  background:#071b2b;
+  border:1px solid #28536a;
+  border-radius:8px;
+  padding:14px;
+  color:#9fb4c0;
+  line-height:1.5;
+">
+MetaTrader 5 must be running and logged into your trading account.<br>
+No additional connection settings are required.
+</div>
+</div>
+
+</div>
+
+
+<h2>RSI ENTRY</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>RSI Period</label>
+<input id="rsi_period" type="number" min="2" value="14">
+</div>
+
+<div class="field">
+<label>RSI Timeframe</label>
+
+<select id="rsi_timeframe">
+<option value="1 min">1 minute</option>
+<option value="5 mins" selected>5 minutes</option>
+<option value="15 mins">15 minutes</option>
+<option value="1 hour">1 hour</option>
+<option value="1 day">Daily</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Entry Rule</label>
+
+<select id="entry">
+<option value="RSI_BELOW">RSI below</option>
+<option value="RSI_ABOVE">RSI above</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Entry RSI</label>
+<input id="entry_value" type="number" min="0" max="100" value="30">
+</div>
+
+</div>
+
+
+<h2>EXIT</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>RSI Exit Rule</label>
+
+<select id="exit">
+<option value="RSI_ABOVE">RSI above</option>
+<option value="RSI_BELOW">RSI below</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Exit RSI</label>
+<input id="exit_value" type="number" min="0" max="100" value="70">
+</div>
+
+<div class="field">
+<label>Initial Stop Loss %</label>
+<input id="stop_loss_pct" type="number" min="0.1" step="0.1" value="3">
+</div>
+
+<div class="field">
+<label>Trailing Stop %</label>
+<input id="trailing_stop_pct" type="number" min="0.1" step="0.1" value="2">
+</div>
+
+</div>
+
+
+<h2>EXECUTION</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>Trading Mode</label>
+
+<select id="mode" onchange="updateTradingModePort()">
+<option>PAPER</option>
+<option>LIVE</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>1 Share Safety Override</label>
+
+<select id="one_share_override">
+<option value="true" selected>ON</option>
+<option value="false">OFF</option>
+</select>
+
+</div>
+
+<div class="field full">
+<label>Order Execution</label>
+
+<select id="execution_enabled">
+<option value="false" selected>DISABLED</option>
+<option value="true">ENABLED</option>
+</select>
+
+</div>
+
+</div>
+
+
+<div class="warning">
+
+<strong>LIVE TRADING WARNING</strong>
+
+<br><br>
+
+This bot can connect to IBKR and may submit real orders when LIVE mode
+and order execution are enabled. Confirm the account, port, symbol,
+quantity and safety settings before enabling execution.
+
+</div>
+
+
+<!-- ============================================================
+     REVIEW BUTTON
+     ============================================================ -->
+
+<button class="review-button" onclick="reviewBot()">
+REVIEW BOT
+</button>
+
+
+<!-- ============================================================
+     IN-PAGE REVIEW
+     ============================================================ -->
+
+<div id="review_panel" class="review-panel">
+
+<h3 id="review_bot_name" class="review-title">
+Bot Review
+</h3>
+
+
+<div class="review-section">
+
+<span class="review-label">
+BROKER
+</span>
+
+<div id="review_broker" class="review-value"></div>
+
+</div>
+
+
+<div class="review-section">
+
+<span class="review-label">
+TRADE
+</span>
+
+<div id="review_trade" class="review-value"></div>
+
+</div>
+
+
+<div class="review-section">
+
+<span class="review-label">
+ENTRY
+</span>
+
+<div id="review_entry" class="review-value"></div>
+
+</div>
+
+
+<div class="review-section">
+
+<span class="review-label">
+EXIT / PROTECTION
+</span>
+
+<div id="review_exit" class="review-value"></div>
+
+</div>
+
+
+<div class="review-section">
+
+<span class="review-label">
+EXECUTION
+</span>
+
+<div id="review_execution" class="review-value"></div>
+
+</div>
+
+
+<div id="review_live_warning" class="review-live-warning">
+
+<strong>⚠ LIVE TRADING ENABLED</strong>
+
+<br><br>
+
+This configuration may submit REAL orders to IBKR.
+
+<br><br>
+
+<span id="review_live_quantity"></span>
+
+</div>
+
+</div>
+
+<div style="display:flex; justify-content:center; margin-top:20px;">
+  <div
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAAE7jN23hTQ6hBYIx">
+  </div>
+</div>
+
+<button onclick="buildPlan()">
+BUILD MY TRADING BOT
+</button>
+
+
+
+   <div id="buildProgress" class="build-progress">
+
+  <div class="build-progress-title" id="buildProgressTitle">
+    BUILDING YOUR TRADING BOT
+  </div>
+
+  <div class="build-progress-bar">
+    <div id="buildProgressFill" class="build-progress-fill"></div>
+  </div>
+
+  <div class="build-progress-steps">
+
+    <div id="buildStepSubmit">
+      ✓ Configuration submitted
+    </div>
+
+    <div id="buildStepStart">
+      ✓ Windows build started
+    </div>
+
+    <div id="buildStepInstaller">
+      ● Building Windows installer...
+    </div>
+
+  </div>
+
+  <div class="build-progress-note">
+    This normally takes about 1–2 minutes.
+  </div>
+
+</div>
+
+
+<p class="note">
+Broker credentials are not stored in this plan. The bot connects locally
+to your configured IBKR TWS or Gateway API.
+</p>
+
+</div>
+
+
+
+<!-- ============================================================
+     WHY BUILD A TRADING BOT
+     ============================================================ -->
+
+<section class="why-bot">
+
+<div class="why-bot-header">
+
+<span class="why-label">
+WHY AUTOMATE?
+</span>
+
+<h1>
+Why Build a Trading Bot?
+</h1>
+
+<p>
+A trading bot turns your strategy into a defined set of rules that can
+monitor the market and act consistently — without requiring you to sit
+in front of a chart all day.
+</p>
+
+</div>
+
+
+<div class="why-grid">
+
+
+<div class="why-card">
+
+<h3>
+Trade the Rules, Not the Emotion
+</h3>
+
+<p>
+Define your entry, exit and risk rules before the trade happens.
+Your bot follows those instructions consistently instead of hesitating,
+chasing a move or changing the plan during a trade.
+</p>
+
+</div>
+
+
+<div class="why-card">
+
+<h3>
+Stop Staring at Charts
+</h3>
+
+<p>
+Let the bot monitor the market while you do something else.
+When the conditions you've defined occur, the bot can recognize
+them automatically.
+</p>
+
+</div>
+
+
+<div class="why-card">
+
+<h3>
+React Immediately
+</h3>
+
+<p>
+Automation can respond when your trading conditions are met without
+waiting for you to notice the signal, open an order ticket and manually
+enter the trade.
+</p>
+
+</div>
+
+
+<div class="why-card">
+
+<h3>
+Build In Risk Controls
+</h3>
+
+<p>
+Position size, initial stops, trailing stops and exit conditions can
+be defined before a position is opened rather than decided after
+the market starts moving.
+</p>
+
+</div>
+
+
+<div class="why-card">
+
+<h3>
+Make Strategies Repeatable
+</h3>
+
+<p>
+Turn a trading idea into specific rules that can be executed the same
+way each time. That makes a strategy easier to test, review and improve.
+</p>
+
+</div>
+
+
+<div class="why-card">
+
+<h3>
+You Stay in Control
+</h3>
+
+<p>
+Choose the symbol, direction, indicators, position size, entry rules,
+exit rules and risk controls. Start in paper mode and decide when —
+or whether — live execution should be enabled.
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="why-bottom">
+
+<h2>
+Your Strategy. Your Rules. Your Bot.
+</h2>
+
+<p>
+BuildATradingBot turns the configuration you create above into a local
+trading bot built around your rules.
+</p>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+
+<!-- ============================================================
+     BOT PLAN JAVASCRIPT
+     ============================================================ -->
+
+<script>
+
+
+function v(id){
+  return document.getElementById(id).value;
+}
+function updateTradingModePort(){
+
+  const mode = v("mode");
+  const port = document.getElementById("port");
+
+  if(mode === "LIVE"){
+    port.value = 7496;
+  }else{
+    port.value = 7497;
+  }
+
+}
+function updateBrokerFields(){
+
+  const broker = v("broker");
+  const ibkrFields = document.querySelectorAll(".ibkr-field");
+  const mt5Info = document.getElementById("mt5_info");
+
+  if(broker === "MT5"){
+
+    ibkrFields.forEach(field => {
+      field.style.display = "none";
+    });
+
+    mt5Info.style.display = "flex";
+
+  }else{
+
+    ibkrFields.forEach(field => {
+      field.style.display = "flex";
+    });
+
+    mt5Info.style.display = "none";
+
+  }
+}
+/*
+  ONE PLAN FUNCTION
+
+  Both REVIEW BOT and BUILD MY BOT PLAN use this exact function.
+
+  That means the configuration displayed in the review is constructed
+  from exactly the same values that will be written to bot_plan.json.
+*/
+
+function getPlan(){
+
+  return {
+
+    schema:"buildatradingbot.plan.v0.2",
+
+    bot_name:v("bot_name"),
+
+    broker:v("broker"),
+
+    connection:{
+      host:v("host"),
+      port:Number(v("port")),
+      client_id:Number(v("client_id"))
+    },
+
+    symbol:v("symbol").trim().toUpperCase(),
+
+    direction:v("direction"),
+
+    quantity:Number(v("quantity")),
+
+    entry:{
+      indicator:"RSI",
+      period:Number(v("rsi_period")),
+      timeframe:v("rsi_timeframe"),
+      operator:v("entry")==="RSI_BELOW" ? "<" : ">",
+      value:Number(v("entry_value"))
+    },
+
+    exit:{
+      indicator:"RSI",
+      operator:v("exit")==="RSI_BELOW" ? "<" : ">",
+      value:Number(v("exit_value"))
+    },
+
+    risk:{
+      stop_loss_pct:Number(v("stop_loss_pct")),
+      trailing_stop_pct:Number(v("trailing_stop_pct"))
+    },
+
+    mode:v("mode"),
+
+    one_share_override:
+      v("one_share_override")==="true",
+
+    execution_enabled:
+      v("execution_enabled")==="true"
+
+  };
+
+}
+
+
+/* ============================================================
+   REVIEW BOT
+   ============================================================ */
+
+function reviewBot(){
+
+  const plan=getPlan();
+
+
+  document.getElementById("review_bot_name").textContent =
+    plan.bot_name;
+
+
+  document.getElementById("review_broker").innerHTML =
+
+    plan.broker +
+
+    "<br>" +
+
+    plan.connection.host +
+    " : " +
+    plan.connection.port +
+
+    "<br>" +
+
+    "Client ID: " +
+    plan.connection.client_id;
+
+
+  document.getElementById("review_trade").innerHTML =
+
+    plan.symbol +
+
+    "<br>" +
+
+    plan.direction +
+
+    "<br>" +
+
+    "Quantity: " +
+    plan.quantity;
+
+
+  document.getElementById("review_entry").innerHTML =
+
+    "RSI(" +
+    plan.entry.period +
+    ") on " +
+    plan.entry.timeframe +
+    " bars" +
+
+    "<br>" +
+
+    "Enter when RSI " +
+    plan.entry.operator +
+    " " +
+    plan.entry.value;
+
+
+  document.getElementById("review_exit").innerHTML =
+
+    "RSI exit " +
+    plan.exit.operator +
+    " " +
+    plan.exit.value +
+
+    "<br>" +
+
+    "Initial stop: " +
+    plan.risk.stop_loss_pct +
+    "%" +
+
+    "<br>" +
+
+    "Trailing stop: " +
+    plan.risk.trailing_stop_pct +
+    "%";
+
+
+  document.getElementById("review_execution").innerHTML =
+
+    "Trading mode: " +
+    plan.mode +
+
+    "<br>" +
+
+    "Order execution: " +
+    (plan.execution_enabled ? "ENABLED" : "DISABLED") +
+
+    "<br>" +
+
+    "1 Share Safety Override: " +
+    (plan.one_share_override ? "ON" : "OFF");
+
+
+  const liveWarning =
+    document.getElementById("review_live_warning");
+
+
+  const liveQuantity =
+    document.getElementById("review_live_quantity");
+
+
+  if(plan.mode==="LIVE" && plan.execution_enabled){
+
+    liveWarning.classList.add("show");
+
+
+    if(plan.one_share_override){
+
+      liveQuantity.textContent =
+        "Maximum order quantity with safety override enabled: 1 SHARE.";
+
+    }else{
+
+      liveQuantity.textContent =
+        "1 Share Safety Override is OFF. Requested quantity: " +
+        plan.quantity +
+        ".";
+
+    }
+
+  }else{
+
+    liveWarning.classList.remove("show");
+
+    liveQuantity.textContent="";
+
+  }
+
+
+  const panel =
+    document.getElementById("review_panel");
+
+
+  panel.classList.add("show");
+
+
+  /*
+    Scroll the review into view after it opens.
+  */
+
+  panel.scrollIntoView({
+    behavior:"smooth",
+    block:"nearest"
+  });
+
+}
+
+
+/* ============================================================
+   BUILD / DOWNLOAD PLAN
+   ============================================================ */
+
+async function buildPlan(){
+
+  const plan = getPlan();
+
+  const turnstileToken =
+  document.querySelector('[name="cf-turnstile-response"]')?.value;
+
+if(!turnstileToken){
+  alert("Please complete the security check before building your bot.");
+  return;
+}
+
+plan.turnstile_token = turnstileToken;
+
+  if(plan.mode === "LIVE" && plan.execution_enabled){
+
+    const ok = confirm(
+      "LIVE TRADING IS ENABLED.\n\n" +
+      "This configuration may submit REAL broker orders.\n\n" +
+      "Symbol: " + plan.symbol + "\n" +
+      "Quantity: " + plan.quantity + "\n" +
+      "1 Share Override: " +
+      (plan.one_share_override ? "ON" : "OFF") +
+      "\n\nContinue?"
+    );
+
+    if(!ok) return;
+  }
+
+
+  const buildButton = document.querySelector(
+    'button[onclick="buildPlan()"]'
+  );
+
+  const progressPanel =
+    document.getElementById("buildProgress");
+
+  const progressTitle =
+    document.getElementById("buildProgressTitle");
+
+  const progressFill =
+    document.getElementById("buildProgressFill");
+
+  const stepSubmit =
+    document.getElementById("buildStepSubmit");
+
+  const stepStart =
+    document.getElementById("buildStepStart");
+
+  const stepInstaller =
+    document.getElementById("buildStepInstaller");
+
+
+  /* START BUILDING STATE */
+
+  buildButton.disabled = true;
+  buildButton.classList.add("building");
+  buildButton.textContent = "BUILDING YOUR TRADING BOT...";
+
+  progressPanel.style.display = "block";
+  progressPanel.classList.remove("ready", "failed");
+
+  progressTitle.textContent =
+    "BUNDLING YOUR ZIP FOLDER";
+
+  progressFill.classList.remove("complete", "failed");
+
+  stepSubmit.textContent =
+    "● Submitting configuration...";
+
+  stepStart.textContent =
+    "○ Starting Windows build...";
+
+  stepInstaller.textContent =
+    "○ Building Windows installer...";
+
+
+  try{
+
+    const response = await fetch(
+      "https://falling-sky-7997.algobotbuilder.workers.dev/",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(plan)
+      }
+    );
+
+
+    const result = await response.json();
+
+
+    if(!response.ok || !result.ok){
+
+      throw new Error(
+        result.error ||
+        "The builder returned an error."
+      );
+    }
+
+
+    const buildId = result.build_id;
+const commitSha = result.commit_sha;
+
+    /* CONFIGURATION ACCEPTED */
+
+    stepSubmit.textContent =
+      "✓ Configuration submitted";
+
+    stepStart.textContent =
+      "✓ Windows build started";
+
+    stepInstaller.textContent =
+      "● Building Windows installer...";
+
+
+    /* POLL FOR THIS EXACT BUILD */
+
+    while(true){
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 5000)
+      );
+
+
+      const statusResponse = await fetch(
+        "https://falling-sky-7997.algobotbuilder.workers.dev/build/status?id=" +
+encodeURIComponent(buildId) +
+"&sha=" + encodeURIComponent(commitSha)
+      );
+
+
+      const status =
+        await statusResponse.json();
+
+
+      if(!statusResponse.ok || !status.ok){
+
+        throw new Error(
+          status.error ||
+          "Could not check build status."
+        );
+      }
+
+
+      if(status.ready){
+
+        /* BUILD COMPLETE */
+
+        progressFill.classList.add("complete");
+
+         progressPanel.classList.add("ready");
+
+document.title =
+  "✓ YOUR BOT IS READY — BuildATradingBot";
+
+        progressTitle.textContent =
+          "✓ YOUR TRADING BOT IS READY";
+
+        stepSubmit.textContent =
+          "✓ Configuration submitted";
+
+        stepStart.textContent =
+          "✓ Windows build completed";
+
+        stepInstaller.textContent =
+          "✓ Installer ready to download";
+
+
+        buildButton.classList.remove("building");
+buildButton.classList.add("download-ready");
+
+buildButton.disabled = false;
+
+        buildButton.textContent =
+          "DOWNLOAD ZIP FOLDER";
+
+
+        buildButton.onclick = function(){
+
+  buildButton.classList.remove("download-ready");
+  buildButton.textContent = "✓ DOWNLOAD STARTED. CHECK DOWNLOADS FOLDER.";
+
+  window.location.href =
+    "https://falling-sky-7997.algobotbuilder.workers.dev/download?id=" +
+    encodeURIComponent(buildId);
+
+};
+
+
+        return;
+      }
+    }
+
+
+  }catch(error){
+
+    console.error(error);
+
+    progressFill.classList.remove("complete");
+    progressFill.classList.add("failed");
+    progressPanel.classList.remove("ready");
+    progressPanel.classList.add("failed");
+
+    progressTitle.textContent =
+      "BOT BUILD FAILED";
+
+    stepInstaller.textContent =
+      "✕ " + error.message;
+
+
+    buildButton.classList.remove("building");
+buildButton.classList.remove("download-ready");
+
+    buildButton.disabled = false;
+
+    buildButton.textContent =
+      "TRY BUILD AGAIN";
+
+  }
+}
+
+  function openLocalInfo(){
+  document.getElementById("localInfoModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLocalInfo(){
+  document.getElementById("localInfoModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function closeLocalInfoOutside(event){
+  if(event.target.id === "localInfoModal"){
+    closeLocalInfo();
+  }
+}
+
+document.addEventListener("keydown", function(event){
+  if(event.key === "Escape"){
+    closeLocalInfo();
+  }
+});
+</script>
+
+
+</body>
+</html>
+
+
