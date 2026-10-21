@@ -735,6 +735,25 @@ body{background:#0b111c!important;color:#e6edf3!important;font:15px/1.55 system-
 }
 .topbar .links a:active {background:#316493!important;border-color:#a2d3ff!important;}
 </style>
+<style id="checkout-hover-matched-specificity-20261021">
+/* Match the hover border/glow of both checkout choices; keep checked appearance. */
+#checkoutCatalog .checkout-choice.release-beta:hover,
+#checkoutCatalog .checkout-choice.premium-beta-choice:hover,
+#checkoutCatalog .checkout-choice:has(input[data-local-free]):hover,
+#checkoutCatalog .checkout-choice:has(input[data-control]):hover,
+#checkoutCatalog .checkout-choice.release-beta:focus-within,
+#checkoutCatalog .checkout-choice.premium-beta-choice:focus-within {
+  background:rgba(48,104,155,.35)!important;
+  border-color:#79a6cd!important;
+  color:#fff!important;
+  box-shadow:0 0 0 1px rgba(121,166,205,.45)!important;
+}
+#checkoutCatalog .checkout-choice.release-beta:has(input:checked):hover,
+#checkoutCatalog .checkout-choice.premium-beta-choice:has(input:checked):hover {
+  background:rgba(49,113,173,.52)!important;
+  border-color:#b2d8f5!important;
+}
+</style>
 </head><body>
 <header class="topbar"><div class="wrap nav"><a aria-label="Trader Repository homepage" class="repo-wordmark" href="index.html"><span class="repo-wordmark-lines"><span class="repo-title"><span class="repo-mark">&lt;/&gt;</span> trader <span class="repo-blue">repository</span></span><small>// trading software for download</small></span></a><nav class="links"><a href="#backtest-mechanic">Backtest Mechanic</a><a href="#free">Free Trading Bots</a><a href="#premium">Trading Bots</a><a href="#chart">Advanced Chart</a><a href="#control">Control Panel</a><a href="#intelligence">HAL Intelligence</a><a href="#thinkbox">HAL Think Box</a><a href="#other">Coming Soon</a><a href="#beebot-banner">BeeBot + The HIVE</a></nav></div></header>
 <main class="wrap">
