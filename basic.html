@@ -926,26 +926,56 @@ document.querySelectorAll('.checkout-product').forEach(card=>{
 <section hidden="" id="upgradeVerifiedPanel">
 <table class="upgrade-status-table"><tbody>
 <tr><td>Bot</td><td id="upgradeBot">—</td></tr>
-<tr><td>License</td><td id="upgradeLicense">—</td></tr>
-<tr><td>Upgrades used</td><td id="upgradeUsed">—</td></tr>
-<tr><td>Upgrades remaining</td><td id="upgradeRemaining">—</td></tr>
+<tr><td>Order ID</td><td id="upgradeLicense">—</td></tr>
+<tr><td>Additional downloads used</td><td id="upgradeUsed">—</td></tr>
+<tr><td>Additional downloads remaining</td><td id="upgradeRemaining">—</td></tr>
 <tr><td>Cost</td><td>FREE</td></tr>
 </tbody></table>
-<p>Redeeming this upgrade will use one of your remaining free upgrades. Continue?</p>
-<button class="upgrade-confirm" disabled="" id="upgradeConfirm" type="button">CONFIRM FREE UPGRADE</button>
+<p>This is a read-only status check. No additional download has been redeemed.</p>
+
 </section>
 </dialog>
 <script id="upgrade-dialog-behavior">(function(){
  const $=id=>document.getElementById(id), dialog=$('upgradeDialog'), key=$('upgradeKey'), status=$('upgradeStatusMessage');
+ const panel=$('upgradeVerifiedPanel');
+ const normalize=value=>String(value||'').trim().toUpperCase();
+ function prefill(){
+   const entered=normalize($('restoreKey').value);
+   if(entered)key.value=entered;
+   else if(normalize(key.value))$('restoreKey').value=normalize(key.value);
+ }
+ $('restoreKey').addEventListener('input',()=>{key.value=$('restoreKey').value;});
+ key.addEventListener('input',()=>{$('restoreKey').value=key.value;});
  $('upgradeClose').addEventListener('click',()=>dialog.close());
- dialog.addEventListener('close',()=>{$('upgradeVerifiedPanel').hidden=true;status.textContent='';key.value='';});
+ dialog.addEventListener('close',()=>{panel.hidden=true;status.textContent='';});
+ dialog.addEventListener('close',()=>{if(key.value)$('restoreKey').value=key.value;});
+ // Pre-fill regardless of which entry button opened the dialog.
+ document.querySelectorAll('#openRecovery,#restoreBtn').forEach(button=>button.addEventListener('click',prefill));
  $('upgradeCheck').addEventListener('click',async()=>{
-   $('upgradeVerifiedPanel').hidden=true;
-   $('upgradeConfirm').disabled=true;
-   const license=key.value.trim().toUpperCase();
-   if(!/^MBB-[A-F0-9]{8}(?:-[A-F0-9]{8}){7}$/.test(license)){status.textContent='Enter your complete Premium license key.';status.className='upgrade-error';return;}
-   status.textContent='Upgrade status lookup will be enabled when the Worker and per-bot database are updated. No upgrade has been used.';
-   status.className='';
+   panel.hidden=true;
+   const license=normalize(key.value || $('restoreKey').value);
+   if(!/^MBB-[A-F0-9]{8}(?:-[A-F0-9]{8}){7}$/.test(license)){
+     status.textContent='Enter your complete Premium license key.';status.className='upgrade-error';return;
+   }
+   key.value=license;$('restoreKey').value=license;
+   status.textContent='Checking license status...';status.className='';
+   $('upgradeCheck').disabled=true;
+   try{
+     const response=await fetch(WORKER+'/premium/license-status',{
+       method:'POST',headers:{'Content-Type':'application/json'},
+       body:JSON.stringify({license_key:license}),cache:'no-store'
+     });
+     const data=await response.json();
+     if(!response.ok||!data.ok)throw Error(data.error||'License status unavailable');
+     $('upgradeBot').textContent=data.product_name||'Legacy Premium License';
+     $('upgradeLicense').textContent=data.order_id||'Legacy (no order ID)';
+     $('upgradeUsed').textContent=data.recovery_used?'1 of 1':'0 of 1';
+     $('upgradeRemaining').textContent=String(data.recovery_remaining ?? 0);
+     status.textContent=data.legacy?'Legacy license recognized. No product-specific order is associated with this older key.':'License active: '+data.product_name+' v'+data.product_version+'.';
+     status.className='upgrade-verified';
+     panel.hidden=false;
+   }catch(error){status.textContent=error.message||'Unable to check license.';status.className='upgrade-error';}
+   finally{$('upgradeCheck').disabled=false;}
  });
 })();</script>
 </body></html>
