@@ -36,9 +36,13 @@ b.innerHTML='<h2>YOUR SOFTWARE. YOUR COMPUTER.</h2><div class="tr-benefit-grid">
 const media=main.querySelector(".tr-slideshow-link");if(media)media.before(b);else main.append(b);
 }
 // Keep gallery media out of product pages; retain a direct category link.
-const media=main.querySelector(".tr-slideshow-link");
-if(media){let a=media.querySelector("a");if(a){a.href=slideUrl;}}
-else{const sec=document.createElement("section");sec.className="tr-slideshow-link";sec.innerHTML='<h2>Photos, Videos &amp; Demonstrations</h2><p>All product screenshots and videos are in Slideshows.</p><a href="'+slideUrl+'">View in Slideshows →</a>';main.append(sec);}
+
+// Keep existing slideshow links, but do not create duplicate banners.
+const media = main.querySelector(".tr-slideshow-link");
+if (media) {
+    const a = media.querySelector("a");
+    if (a) a.href = slideUrl;
+}
 if(!main.querySelector('.tr-standard-checkout')&&!main.querySelector('a[href="../basic.html"],a[href="/basic.html"]')){const c=document.createElement("section");c.className="panel tr-standard-checkout";c.innerHTML='<h2>Download &amp; checkout</h2><p>Check the catalog for release availability.</p><a class="btn" href="/basic.html">Go to checkout →</a>';main.append(c);}
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ready);else ready();
