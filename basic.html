@@ -779,7 +779,7 @@ body{background:#0b111c!important;color:#e6edf3!important;font:15px/1.55 system-
   update();
 })();
 </script><script>
-const WORKER='https://falling-sky-7997.algobotbuilder.workers.dev';
+const WORKER='https://falling-sky-7997.traderrepository.workers.dev';
 function selectedPremiumProduct(){
   const picks=[...document.querySelectorAll('input.download-pick[data-edition="Premium"]:checked')].map(p=>p.dataset.bot||p.dataset.localPremium||p.closest('[data-bot]')?.dataset.bot).filter(Boolean);
   const legacy=[...document.querySelectorAll('#legacyPurchaseSelectors .bot-card')].filter(c=>c.querySelector('.edition:checked')?.value==='Premium').map(c=>c.dataset.bot);
