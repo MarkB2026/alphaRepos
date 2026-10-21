@@ -1,0 +1,46 @@
+/* Shared product-page presentation, adapted from the provided Momentum Bot reference.
+   Information stays specific to each product; all media lives in Slideshows. */
+:root{color-scheme:dark}
+body.tr-product-standard{margin:0;background:#0b111c;color:#e5edf6;font:15px/1.65 system-ui,"Segoe UI",sans-serif}
+body.tr-product-standard .top{background:#0e1825;border-bottom:1px solid #2d4054;padding:15px 0}
+body.tr-product-standard .top .wrap{width:min(1150px,calc(100% - 36px));margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+body.tr-product-standard .top .brand{font:700 20px ui-monospace,Consolas,monospace;color:#f2f6ff;text-decoration:none}
+body.tr-product-standard .top .brand b{color:#57b5ec}
+body.tr-product-standard .top .tagline{font:11px ui-monospace,monospace;color:#8ca5ba}
+body.tr-product-standard .top .nav{display:flex;flex-wrap:wrap;gap:16px}
+body.tr-product-standard .top .nav a{font-size:13px;color:#bdd6e9;text-decoration:none}
+body.tr-product-standard .top .nav a:hover{color:#64c4f7}
+body.tr-product-standard main.wrap{width:min(1150px,calc(100% - 36px));max-width:1150px;margin:28px auto 60px;padding:0}
+body.tr-product-standard main.wrap > .breadcrumb{font:11px ui-monospace,Consolas,monospace;color:#8fb7d5;letter-spacing:.05em;margin-bottom:10px}
+body.tr-product-standard main.wrap > h1{font-size:clamp(30px,4vw,44px);line-height:1.16;color:#f5fbff;letter-spacing:-1px;margin:0 0 12px}
+body.tr-product-standard .status{color:#84caef;font:700 11px ui-monospace,Consolas,monospace;letter-spacing:.08em;margin:0 0 18px}
+body.tr-product-standard .expanded-details,body.tr-product-standard main.wrap > article,body.tr-product-standard main.wrap > .panel{border:1px solid #30475c;border-radius:11px;background:#111f2e;padding:25px;margin:22px 0;color:#dae7f4}
+body.tr-product-standard main.wrap > article{max-width:none}
+body.tr-product-standard .expanded-details h2,body.tr-product-standard .panel h2{font-size:23px;margin:0 0 12px;color:#edf7ff}
+body.tr-product-standard .expanded-details h3,body.tr-product-standard .panel h3{font-size:17px;margin:22px 0 8px;color:#e6f2fc}
+body.tr-product-standard .expanded-details p,body.tr-product-standard .expanded-details li,body.tr-product-standard .panel p,body.tr-product-standard .panel li{color:#c2d2df}
+body.tr-product-standard .spec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+body.tr-product-standard .spec-item{border:1px solid #32465a;background:#0d1b29;border-radius:8px;padding:12px}
+body.tr-product-standard .spec-item span{display:block;color:#8caabe;font:11px ui-monospace,monospace;text-transform:uppercase;margin-bottom:5px}
+body.tr-product-standard .spec-item strong{font-size:13px}
+body.tr-product-standard .tr-standard-specs{margin:16px 0 22px;padding:12px 15px;background:#0b1928;border:1px solid #30475c;border-radius:9px}
+body.tr-product-standard .tr-standard-specs h2{font-size:15px;margin:0 0 8px;color:#eff8ff}
+body.tr-product-standard .tr-standard-row{display:flex;gap:10px 16px;align-items:center;flex-wrap:wrap;padding:8px 0}
+body.tr-product-standard .tr-standard-row+.tr-standard-row{border-top:1px solid #263b4f}
+body.tr-product-standard .tr-standard-label{font-weight:700;font-size:11px;letter-spacing:.06em;color:#94b3ca;min-width:125px}
+body.tr-product-standard .tr-standard-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid #30475c;border-radius:7px;background:#132436;color:#d6e7f5;font-size:12px}
+body.tr-product-standard .tr-standard-chip.supported{background:#153044;border-color:#27657a;color:#d6f4ff}
+body.tr-product-standard .tr-standard-chip.muted{background:#101c2b;color:#9db1c0}
+body.tr-product-standard .tr-standard-benefits{margin:22px 0;border:1px solid #30475c;border-radius:12px;padding:16px;background:#111f2e}
+body.tr-product-standard .tr-standard-benefits h2{margin:0 0 12px;font-size:17px;letter-spacing:.04em;color:#f3f9ff}
+body.tr-product-standard .tr-benefit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+body.tr-product-standard .tr-benefit{border:1px solid #30475c;border-radius:9px;padding:13px 10px;background:#0b1928}
+body.tr-product-standard .tr-benefit .symbol{color:#58bdfb;font-size:20px;line-height:1;margin-bottom:9px}
+body.tr-product-standard .tr-benefit strong{display:block;color:#f4f8fc;font-size:13px;margin-bottom:6px}
+body.tr-product-standard .tr-benefit small{display:block;color:#a9c2d5;font-size:12px;line-height:1.45}
+body.tr-product-standard .tr-slideshow-link{border:1px solid #345a75;border-radius:10px;background:#102435;padding:20px 23px}
+body.tr-product-standard .tr-slideshow-link a,body.tr-product-standard .btn{display:inline-block;border:1px solid #4084aa;border-radius:7px;background:#1a4865;color:#f0f7fc;text-decoration:none;padding:10px 14px;font-weight:600}
+body.tr-product-standard .tr-slideshow-link a:hover,body.tr-product-standard .btn:hover{background:#246184}
+body.tr-product-standard footer{width:min(1150px,calc(100% - 36px));margin:0 auto;padding:22px 0;color:#8ca3b5;font-size:12px}
+@media(max-width:760px){body.tr-product-standard .tr-benefit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body.tr-product-standard .tr-standard-label{min-width:100%}}
+@media(max-width:680px){body.tr-product-standard .spec-grid{grid-template-columns:1fr}body.tr-product-standard .expanded-details,body.tr-product-standard main.wrap>.panel{padding:18px}}
