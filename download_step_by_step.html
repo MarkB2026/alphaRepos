@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download Publishing — Step by Step | Trader Repository</title>
+<style>
+:root{color-scheme:dark;--bg:#091321;--panel:#11243a;--border:#2a4863;--text:#f0f6ff;--muted:#afc4d7;--accent:#60bcff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:920px;margin:auto;padding:46px 22px 80px}h1{font-size:clamp(30px,5vw,44px);line-height:1.15;margin:8px 0 14px}h2{font-size:21px;margin:0 0 12px;color:#d9f0ff}p{margin:8px 0 14px}.eyebrow{font:700 12px Consolas,monospace;letter-spacing:2px;color:var(--accent)}.intro{font-size:18px;color:var(--muted)}section{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px 27px;margin:20px 0}ol{padding-left:24px;margin:10px 0}li{padding:3px 0}a{color:#78caff}code{background:#081725;padding:3px 6px;border-radius:5px;overflow-wrap:anywhere;color:#9cdeff}pre{background:#061321;border:1px solid var(--border);border-radius:9px;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.note{border-left:3px solid var(--accent);padding:12px 16px;background:#102e46;border-radius:0 8px 8px 0}.footer{color:var(--muted);font-size:13px;margin-top:24px}@media print{:root{color-scheme:light}body{background:white;color:#111}section{break-inside:avoid;background:#fff;border-color:#bbb}h2,.eyebrow{color:#17456d}pre,code{background:#f1f4f7;color:#123}a{color:#17456d}.intro,.footer{color:#444}}</style>
+</head><body><main class="wrap">
+<div class="eyebrow">TRADER REPOSITORY · RELEASE PLAYBOOK</div>
+<h1>Publishing an Installer — Step by Step</h1>
+<p class="intro">Move a finished Windows installer from a private product build to a public GitHub release, then use a branded website redirect so customers click your product domain instead of a GitHub username.</p>
+<section><h2>1. Download the installer from the private product build</h2><ol><li>Open the product's private GitHub build repository (for example, <code>OptionsPlotter-build</code>).</li><li>Click <strong>Releases</strong> and open the latest successful build release.</li><li>Under <strong>Assets</strong>, download the compiled <code>.exe</code> to your computer.</li><li>Keep the exact installer filename; you'll use it in the public release.</li></ol></section>
+<section><h2>2. Create a release in TraderRepository-Downloads</h2><ol><li>Open <a href="https://github.com/MarkB2026/TraderRepository-Downloads/releases">TraderRepository-Downloads → Releases</a>.</li><li>Select <strong>Draft a new release</strong>.</li><li>Choose <strong>Create new tag</strong>, for example <code>optionsplotter-premium-v1.0.0</code>, targeting <code>main</code>.</li><li>Fill in the <strong>Release title</strong> and <strong>Description</strong>.</li><li>Under <strong>Attach binaries by dropping them here or selecting them</strong>, upload the <code>.exe</code> downloaded in Step 1.</li><li>Wait for the upload to finish, then click <strong>Publish release</strong>.</li></ol><p class="note"><strong>Important:</strong> The public installer belongs in <code>TraderRepository-Downloads</code>, not in the private product build repository. Basic and Premium can use separate release tags.</p></section>
+<section><h2>3. Copy the full public installer URL</h2><ol><li>Open the newly published release in <code>TraderRepository-Downloads</code>.</li><li>Find the installer under <strong>Assets</strong>.</li><li>Right-click the <code>.exe</code> asset and choose <strong>Copy link address</strong>.</li><li>Verify the link includes <code>TraderRepository-Downloads/releases/download/</code>, followed by your tag and exact filename. Do <strong>not</strong> copy the old <code>OptionsPlotter-build</code> URL.</li></ol><p>Example — Options Plotter Basic v1.0.0:</p><pre>https://github.com/MarkB2026/TraderRepository-Downloads/releases/download/optionsplotter-basic-v1.0.0/OptionsPlotter_Basic_Beta_v1.0.0.exe</pre></section>
+<section><h2>4. Create the branded download redirect</h2><ol><li>Open the public GitHub repository for the product website.</li><li>Create <code>download.html</code> in the repository root. If Basic already uses that name, use <code>download-premium.html</code> for Premium.</li><li>Paste the template below and replace <strong>PASTE_PUBLIC_EXE_URL_HERE</strong> in both places with the full URL copied in Step 3.</li><li>Commit the file. GitHub Pages will publish it with the website.</li></ol><pre>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="robots" content="noindex,nofollow"&gt;
+  &lt;title&gt;Starting your download…&lt;/title&gt;
+  &lt;meta http-equiv="refresh"
+        content="0;url=PASTE_PUBLIC_EXE_URL_HERE"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Your download is starting…&lt;/p&gt;
+  &lt;p&gt;&lt;a href="PASTE_PUBLIC_EXE_URL_HERE"&gt;
+    Click here if it doesn't start.
+  &lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><p>Branded example: <code>https://optionsplotter.com/download-premium.html</code></p></section>
+<section><h2>5. Update the website download buttons</h2><ol><li>Open the website's root <code>index.html</code>.</li><li>Find each button for the edition you are publishing.</li><li>Change its link to the relative redirect path, for example <code>href="download.html"</code> for Basic or <code>href="download-premium.html"</code> for Premium.</li><li>If the button is controlled by JavaScript rather than a normal link, update that click handler to navigate to the redirect.</li><li>Commit <code>index.html</code>. Preserve unrelated styling, videos, payment checkout, and license logic.</li></ol><p class="note"><strong>Paid editions:</strong> Do not replace a purchase or Bitcoin checkout button with a public download button unless that's the intended access model. Link the installer from the appropriate post-purchase flow instead.</p></section>
+<section><h2>6. Test the customer download</h2><ol><li>Open the product website in a private/incognito window.</li><li>Click the relevant download link or visit the branded <code>download.html</code> URL directly.</li><li>Confirm the correct <code>.exe</code> downloads without a GitHub login.</li><li>Check the installer filename and edition. Confirm the website's payment flow still works independently.</li></ol></section>
+<section><h2>Future versions — what changes?</h2><p>Build the new installer, publish a new public release and copy its new asset URL. Then update the existing redirect file with that URL. <strong>The website button stays the same</strong> as long as the redirect filename stays the same.</p><p class="note"><strong>What the redirect masks:</strong> Customers see your branded link when hovering over the website button. The final file is still hosted by GitHub, so the GitHub address can appear in download details or network inspection.</p></section>
+<p class="footer">Trader Repository · Installer publishing reference</p>
+</main></body></html>
